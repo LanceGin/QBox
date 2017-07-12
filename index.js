@@ -17,7 +17,7 @@ var mainWnd = null;
 
 function createMainWnd() {
     mainWnd = new BrowserWindow({
-        width: 800,
+        width: 400,
         height: 600,
         icon: 'public/img/app-icon.png'
     });
