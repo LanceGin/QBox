@@ -7,6 +7,7 @@
           Welcome to your new project!
         </span>
         <system-information></system-information>
+        <about></about>
       </div>
 
       <div class="right-side">
@@ -31,10 +32,11 @@
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation';
+  import About from './About';
 
   export default {
     name: 'landing-page',
-    components: { SystemInformation },
+    components: { SystemInformation, About },
     methods: {
       open(link) {
         this.$electron.shell.openExternal(link);
