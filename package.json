@@ -1,5 +1,5 @@
 {
-  "name": "friday",
+  "name": "qbox",
   "version": "0.0.0",
   "author": "lancegin",
   "description": "assistant",
@@ -21,7 +21,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "friday",
+    "productName": "qbox",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"
