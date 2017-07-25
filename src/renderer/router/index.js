@@ -12,8 +12,8 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'about',
-      component: require('@/components/About'),
+      name: 'home',
+      component: require('@/pages/Home'),
     },
     {
       path: '*',
