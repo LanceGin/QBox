@@ -27,11 +27,11 @@
       return {
         dialogVisible: false,
         dialogFormVisible: false,
+        formLabelWidth: '80px',
         form: {
           ak: '',
           sk: '',
         },
-        formLabelWidth: '80px',
       };
     },
     methods: {
