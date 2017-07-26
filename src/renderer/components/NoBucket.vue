@@ -1,6 +1,6 @@
 <template>
   <div id="no-bucket-page">
-    <p>似乎没有key哦？😯</p>
+    <div class="nothing-img"></div>
     <el-button class="show-modal-btn" @click="dialogFormVisible = true">设置Key</el-button>
 
     <el-dialog
@@ -56,14 +56,24 @@
 </script>
 
 <style scope>
+  .nothing-img {
+    padding-top: 80px;
+    text-align: center;
+    height: 260px;
+    background: url(../../../static/img/nothing.png) no-repeat;
+    background-size: 320px 198.35px;
+    background-position: 40px 80px;
+  }
+  .nothing-img img {
+    width: 80vw;
+  }
   .show-modal-btn {
     background: #2e84c7;
     color: #ffffff;
-    bottom: 0;
     border: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    width: 100vw;
+    width: 40vw;
+    margin-left: 30vw;
+    margin-top: 20px;
     height: 50px;
   }
   .show-modal-btn:hover {
