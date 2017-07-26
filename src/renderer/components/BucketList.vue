@@ -6,29 +6,18 @@
       <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
       <el-col :span="5">
         <div class="grid-content bg-purple">
-          <el-button type="primary" icon="delete" @click="logout()" v-loading.fullscreen.lock="fullscreenLoading">退出</el-button>
+          <el-button class="logout-btn" icon="upload2" @click="logout()" v-loading.fullscreen.lock="fullscreenLoading"></el-button>
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="20">
-      <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-    </el-row>
-    <el-row :gutter="20">
-      <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-    </el-row>
-    <el-row :gutter="20">
-      <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-    </el-row><el-row :gutter="20">
-      <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-    </el-row>
-    <el-row :gutter="20">
-      <el-col :span="16"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-    </el-row>
+    <div v-for="o in 8" :key="o" class="bucket-item">
+      <div class="item-icon">
+        <img src="../../../static/img/bucket.png">
+      </div>
+      <div class="item-name">
+        <p>FanUpload</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,30 +51,34 @@
 </script>
 
 <style scope>
-  .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
+  .logout-btn {
+    position: absolute;
+    right: 15px;
+    top: -43px;
+    border: 0;
+    background: transparent;
+    color: #fff;
   }
-  .el-col {
-    border-radius: 4px;
+  .logout-btn:hover {
+    color: #fff;
   }
-  .bg-purple-dark {
-    background: #99a9bf;
+  .bucket-item {
+    height: 50px;
+    border-bottom: 1px #eee solid;
+    padding: 5px 20px;
   }
-  .bg-purple {
-    background: #d3dce6;
+  .bucket-item:hover {
+    background: #eee;
   }
-  .bg-purple-light {
-    background: #e5e9f2;
+  .item-icon {
+    float: left;
   }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
+  .item-icon img {
+    height: 48px;
   }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
+  .item-name {
+    float: left;
+    padding-left: 10px;
+    color: #888;
   }
 </style>
