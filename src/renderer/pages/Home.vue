@@ -1,7 +1,12 @@
 <template>
-  <!-- check the exist of Key -->
-  <bucket-list v-if="accessKey"></bucket-list>
-  <no-bucket v-else></no-bucket>
+  <div class="home-page">
+    <header style="-webkit-app-region: drag">
+    </header>
+    <!-- check the exist of Key -->
+    <bucket-list v-if="accessKey"></bucket-list>
+
+    <no-bucket v-else></no-bucket>
+  </div>
 </template>
 
 <script>
@@ -31,5 +36,14 @@
 </script>
 
 <style scope>
-
+  body {
+    margin: 0;
+  }
+  header {
+    height: 50px;
+    -webkit-app-region: drag;
+    background: url('../../../static/img/logo.png') no-repeat #2e84c7;
+    background-size: 80.6px 30px;
+    background-position: center;
+  }
 </style>
