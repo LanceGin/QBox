@@ -17,6 +17,10 @@
       <div class="item-name">
         <p>FanUpload</p>
       </div>
+      <div class="item-handler">
+        <i class="el-icon-edit"></i>
+        <i class="el-icon-delete"></i>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +40,7 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
+          customClass: 'confirm-box',
         }).then(() => {
           localStorage.clear();
           this.fullscreenLoading = true;
@@ -59,6 +64,9 @@
     background: transparent;
     color: #fff;
   }
+  .confirm-box {
+    width: 80vw;
+  }
   .logout-btn:hover {
     color: #fff;
   }
@@ -80,5 +88,18 @@
     float: left;
     padding-left: 10px;
     color: #888;
+  }
+  .item-handler {
+    float: right;
+    padding-top: 15px;
+  }
+  .item-handler i {
+    border: 0;
+    margin-right: 10px;
+    background: transparent;
+    color: #888;
+  }
+  .item-handler i:hover {
+    color: #2e84c7;
   }
 </style>
