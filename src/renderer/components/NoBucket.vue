@@ -18,7 +18,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button @click="setKey()">确 定</el-button>
+        <el-button @click="setKey()" v-loading.fullscreen.lock="fullscreenLoading">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -29,6 +29,7 @@
     name: 'no-bucket',
     data() {
       return {
+        fullscreenLoading: false,
         dialogVisible: false,
         dialogFormVisible: false,
         formLabelWidth: '80px',
@@ -40,9 +41,15 @@
     },
     methods: {
       setKey() {
+        const router = this.$router;
         localStorage.accessKey = this.ak;
         localStorage.secretKey = this.sk;
         this.dialogFormVisible = false;
+        this.fullscreenLoading = true;
+        setTimeout(() => {
+          router.push({ path: 'bucket' });
+          this.fullscreenLoading = false;
+        }, 3000);
       },
     },
   };
@@ -52,7 +59,6 @@
   .show-modal-btn {
     background: #2e84c7;
     color: #ffffff;
-    position: absolute;
     bottom: 0;
     border: 0;
     border-top-left-radius: 0;

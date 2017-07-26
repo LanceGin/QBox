@@ -18,4 +18,25 @@ new Vue({
   router,
   store,
   template: '<App/>',
+  created() {
+    this.checkLogin();
+  },
+  methods: {
+    checkLogin() {
+      const accessKey = localStorage.getItem('accessKey');
+      const secretKey = localStorage.getItem('secretKey');
+
+      // check the exist of AK and SK
+      let hasKey = true;
+      if (accessKey == null || secretKey == null) {
+        hasKey = false;
+      }
+
+      if (hasKey === true) {
+        this.$router.push('/bucket');
+      } else {
+        this.$router.push('/login');
+      }
+    },
+  },
 }).$mount('#app');

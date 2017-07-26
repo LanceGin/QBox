@@ -6,7 +6,7 @@
       <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
       <el-col :span="5">
         <div class="grid-content bg-purple">
-          <el-button type="primary" icon="delete" @click="logout()">退出</el-button>
+          <el-button type="primary" icon="delete" @click="logout()" v-loading.fullscreen.lock="fullscreenLoading">退出</el-button>
         </div>
       </el-col>
     </el-row>
@@ -35,14 +35,25 @@
 <script>
   export default {
     name: 'bucket-list',
+    data() {
+      return {
+        fullscreenLoading: false,
+      };
+    },
     methods: {
       logout() {
+        const router = this.$router;
         this.$confirm('确认退出并清空公私钥？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
         }).then(() => {
           localStorage.clear();
+          this.fullscreenLoading = true;
+          setTimeout(() => {
+            router.push({ path: '/' });
+            this.fullscreenLoading = false;
+          }, 1000);
         }).catch(() => {
         });
       },
@@ -50,7 +61,7 @@
   };
 </script>
 
-<style>
+<style scope>
   .el-row {
     margin-bottom: 20px;
     &:last-child {

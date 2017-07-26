@@ -12,8 +12,13 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'home',
-      component: require('@/pages/Home'),
+      name: 'login',
+      component: require('@/pages/Login'),
+    },
+    {
+      path: '/bucket',
+      name: 'bucket',
+      component: require('@/pages/bucket'),
     },
     {
       path: '*',
