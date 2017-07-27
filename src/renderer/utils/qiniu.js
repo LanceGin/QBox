@@ -2,7 +2,7 @@
 import Util from './util';
 
 // commonJs load modules
-const request = require('request');
+const rp = require('request-promise');
 const qiniuHost = 'http://rs.qbox.me';
 
 /**
@@ -14,7 +14,7 @@ export default class Qiniu {
    * @param ak   accessKey
    * @param sk   secretKey
    */
-  static buckets(ak, sk) {
+  static async buckets(ak, sk) {
     const mac = {
       accessKey: ak,
       secretKey: sk,
@@ -22,14 +22,15 @@ export default class Qiniu {
     const requestURI = `${qiniuHost}/buckets`;
     const reqBody = '';
     const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
+
     const options = {
-      url: requestURI,
+      uri: requestURI,
       headers: {
         Authorization: accessToken,
       },
+      json: true,
     };
-    request(options, (err, res, body) => {
-      return JSON.parse(body);
-    });
+
+    return rp(options);
   }
 }

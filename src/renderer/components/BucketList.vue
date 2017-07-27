@@ -10,12 +10,12 @@
         </div>
       </el-col>
     </el-row>
-    <div v-for="o in 8" :key="o" class="bucket-item">
+    <div v-for="bucket in bucketList" :key="bucket" class="bucket-item">
       <div class="item-icon">
         <img src="../../../static/img/bucket.png">
       </div>
       <div class="item-name">
-        <p>FanUpload</p>
+        <p>{{ bucket }}</p>
       </div>
       <div class="item-handler">
         <i class="el-icon-edit"></i>
@@ -26,12 +26,25 @@
 </template>
 
 <script>
+  // import Qiniu class
+  import Qiniu from '../utils/qiniu';
+
+  let buckets;
   export default {
     name: 'bucket-list',
     data() {
       return {
         fullscreenLoading: false,
+        bucketList: buckets,
       };
+    },
+    mounted() {
+      const accessKey = localStorage.accessKey;
+      const secretKey = localStorage.secretKey;
+      Qiniu.buckets(accessKey, secretKey)
+        .then((data) => {
+          this.bucketList = data;
+        });
     },
     methods: {
       logout() {
@@ -57,9 +70,9 @@
 
 <style scope>
   .logout-btn {
-    position: absolute;
-    right: 15px;
-    top: -43px;
+    position: fixed;
+    right: 10px;
+    top: 6px;
     border: 0;
     background: transparent;
     color: #fff;

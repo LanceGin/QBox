@@ -42,8 +42,8 @@
     methods: {
       setKey() {
         const router = this.$router;
-        localStorage.accessKey = this.ak;
-        localStorage.secretKey = this.sk;
+        localStorage.accessKey = this.form.ak;
+        localStorage.secretKey = this.form.sk;
         this.dialogFormVisible = false;
         this.fullscreenLoading = true;
         setTimeout(() => {
