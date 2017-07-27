@@ -32,9 +32,7 @@ new Vue({
         hasKey = false;
       }
 
-      if (hasKey === true) {
-        this.$router.push('/bucket');
-      } else {
+      if (hasKey === false) {
         this.$router.push('/login');
       }
     },
