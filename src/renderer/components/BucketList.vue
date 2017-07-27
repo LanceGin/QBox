@@ -16,7 +16,7 @@
         <p>{{ bucket }}</p>
       </div>
       <div class="item-handler">
-        <i class="el-icon-edit"></i>
+        <i class="el-icon-edit" @click="manage()"></i>
         <i class="el-icon-delete"></i>
       </div>
     </div>
@@ -26,6 +26,8 @@
 <script>
   // import Qiniu class
   import Qiniu from '../utils/qiniu';
+
+  const BrowserWindow = require('electron').remote.BrowserWindow;
 
   let buckets;
   export default {
@@ -51,6 +53,8 @@
         });
     },
     methods: {
+      // logout function.
+      // keys will be clear.
       logout() {
         const router = this.$router;
         this.$confirm('确认退出并清空公私钥？', '提示', {
@@ -67,6 +71,23 @@
           }, 1000);
         }).catch(() => {
         });
+      },
+
+      // manage function.
+      // open a new window to manage files.
+      manage() {
+        // window.open(this.$router);
+        const win = new BrowserWindow({
+          height: 640,
+          useContentSize: true,
+          width: 1000,
+          titleBarStyle: 'hidden-inset',
+          resizable: false,
+        });
+        const winURL = process.env.NODE_ENV === 'development'
+          ? 'http://localhost:9080'
+          : `file://${__dirname}/index.html`;
+        win.loadURL(`${winURL}#/manage`);
       },
     },
   };
