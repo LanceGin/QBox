@@ -11,6 +11,8 @@
 
 <style scope>
   header {
+    position: fixed;
+    width: 100vw;
     height: 50px;
     -webkit-app-region: drag;
     background: url('../../../static/img/logo.png') no-repeat #2e84c7;
