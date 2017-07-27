@@ -11,9 +11,7 @@
       </el-col>
     </el-row>
     <div v-for="bucket in bucketList" :key="bucket" class="bucket-item">
-      <div class="item-icon">
-        <img src="../../../static/img/bucket.png">
-      </div>
+      <div class="item-icon"></div>
       <div class="item-name">
         <p>{{ bucket }}</p>
       </div>
@@ -93,9 +91,11 @@
   }
   .item-icon {
     float: left;
-  }
-  .item-icon img {
     height: 48px;
+    width: 48px;
+    background: url("../../../static/img/bucket.png") no-repeat;
+    background-size: contain;
+    background-position: 0 2px;
   }
   .item-name {
     float: left;
