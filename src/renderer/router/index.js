@@ -21,6 +21,11 @@ export default new Router({
       component: require('@/pages/bucket'),
     },
     {
+      path: '/manage',
+      name: 'manage',
+      component: require('@/pages/manage'),
+    },
+    {
       path: '*',
       redirect: '/',
     },
