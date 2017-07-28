@@ -105,7 +105,6 @@
       },
       // copy the link
       copyLink(row) {
-        console.log(row);
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
@@ -113,13 +112,17 @@
           .then((data) => {
             // get the latest domain
             const domain = data[data.length - 1];
-            const link = `http://${domain}/row.key`;
+            const link = `http://${domain}/${row.key}`;
             clipboard.writeText(link);
             this.$message('链接复制成功..💗');
           })
           .catch((err) => {
             console.log(err);
           });
+      },
+      // remove a file
+      removeFile(row) {
+        console.log(row);
       },
     },
   };
