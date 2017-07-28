@@ -9,6 +9,8 @@
       :data="fileList"
       tooltip-effect="dark"
       style="width: 100%"
+      height="590"
+      stripe
       @selection-change="handleSelectionChange">
       <el-table-column
         type="selection"
@@ -17,23 +19,27 @@
       <el-table-column
         prop="key"
         label="文件名"
+        sortable
         width="320">
       </el-table-column>
       <el-table-column
         prop="mimeType"
         label="文件类型"
+        sortable
         width="150">
       </el-table-column>
       <el-table-column
         prop="fsize"
         label="文件大小"
+        sortable
         width="150">
       </el-table-column>
       <el-table-column
         prop="putTime"
-        label="更新时间"
+        label="修改时间"
+        sortable
         width="200"
-        show->
+        :formatter="dateFormat">
       </el-table-column>
       <el-table-column
         label="操作"
@@ -51,6 +57,7 @@
 <script>
   // import Qiniu class
   import Qiniu from '../utils/qiniu';
+  const moment = require('moment');
 
   export default {
     name: 'file-list',
@@ -84,6 +91,15 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+      },
+      // format the putTime with Unix Timestamp
+      dateFormat(row) {
+        let date = row.putTime;
+        if (date === undefined) {
+          return '';
+        }
+        date = date.toString().substring(0, date.length - 7);
+        return moment.unix(date).format('YYYY-MM-DD HH:mm:ss');
       },
     },
   };

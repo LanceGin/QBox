@@ -57,6 +57,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "element-ui": "^1.4.0",
+    "moment": "^2.18.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "vue": "^2.3.3",
