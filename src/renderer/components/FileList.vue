@@ -6,7 +6,7 @@
     </div>
     <el-table
       ref="multipleTable"
-      :data="tableData3"
+      :data="fileList"
       tooltip-effect="dark"
       style="width: 100%"
       @selection-change="handleSelectionChange">
@@ -20,7 +20,7 @@
         width="320">
       </el-table-column>
       <el-table-column
-        prop="mType"
+        prop="mimeType"
         label="文件类型"
         width="150">
       </el-table-column>
@@ -49,43 +49,28 @@
 </template>
 
 <script>
+  // import Qiniu class
+  import Qiniu from '../utils/qiniu';
+
   export default {
     name: 'file-list',
     data() {
       return {
-        tableData3: [{
-          key: 'assets/Home-Slider/slide-1.jpg',
-          mType: 'image/jpeg',
-          fsize: '640 KB',
-          putTime: '2016-05-03',
-        }, {
-          key: 'assets/Home-Slider/slide-1.jpg',
-          mType: 'image/jpeg',
-          fsize: '640 KB',
-          putTime: '2016-05-03',
-        }, {
-          key: 'assets/Home-Slider/slide-1.jpg',
-          mType: 'image/jpeg',
-          fsize: '640 KB',
-          putTime: '2016-05-03',
-        }, {
-          key: 'assets/Home-Slider/slide-1.jpg',
-          mType: 'image/jpeg',
-          fsize: '640 KB',
-          putTime: '2016-05-03',
-        }, {
-          key: 'assets/Home-Slider/slide-1.jpg',
-          mType: 'image/jpeg',
-          fsize: '640 KB',
-          putTime: '2016-05-03',
-        }, {
-          key: 'assets/Home-Slider/slide-1.jpg',
-          mType: 'image/jpeg',
-          fsize: '640 KB',
-          putTime: '2016-05-03',
-        }],
+        fileList: [],
         multipleSelection: [],
       };
+    },
+    mounted() {
+      const bucket = this.$route.query.bucket;
+      const accessKey = localStorage.accessKey;
+      const secretKey = localStorage.secretKey;
+      Qiniu.list(accessKey, secretKey, bucket)
+        .then((data) => {
+          this.fileList = data.items;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     methods: {
       toggleSelection(rows) {

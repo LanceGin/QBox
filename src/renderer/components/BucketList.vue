@@ -16,7 +16,7 @@
         <p>{{ bucket }}</p>
       </div>
       <div class="item-handler">
-        <i class="el-icon-edit" @click="manage()"></i>
+        <i class="el-icon-edit" @click="manage(bucket)"></i>
         <i class="el-icon-delete"></i>
       </div>
     </div>
@@ -75,7 +75,7 @@
 
       // manage function.
       // open a new window to manage files.
-      manage() {
+      manage(bucket) {
         // window.open(this.$router);
         const win = new BrowserWindow({
           height: 640,
@@ -87,7 +87,7 @@
         const winURL = process.env.NODE_ENV === 'development'
           ? 'http://localhost:9080'
           : `file://${__dirname}/index.html`;
-        win.loadURL(`${winURL}#/manage`);
+        win.loadURL(`${winURL}#/manage?bucket=${bucket}`);
       },
     },
   };
