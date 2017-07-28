@@ -92,13 +92,13 @@
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
-      // format the putTime with Unix Timestamp
       dateFormat(row) {
         let date = row.putTime;
         if (date === undefined) {
           return '';
         }
-        date = date.toString().substring(0, date.length - 7);
+        date = date.toString();
+        date = date.substring(0, date.length - 7);
         return moment.unix(date).format('YYYY-MM-DD HH:mm:ss');
       },
     },
