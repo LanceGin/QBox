@@ -26,6 +26,40 @@ export default class Util {
   }
 
   /**
+   * format the file size
+   * @param fsize  file size
+   */
+  static fsizeFormat(fsize, prec = 2) {
+    let rank = 0;
+    let unit = 'B';
+
+    while (fsize > 1024) {
+      fsize /= 1024;
+      rank += 1;
+    }
+
+    fsize = fsize.toFixed(prec);
+    switch (rank) {
+      case 1:
+        unit = 'KB';
+        break;
+      case 2:
+        unit = 'MB';
+        break;
+      case 3:
+        unit = 'GB';
+        break;
+      case 4:
+        unit = 'TB';
+        break;
+      default:
+        break;
+    }
+    return `${fsize} ${unit}`;
+  }
+
+
+  /**
    * UrlSafe Base64 Decode.
    * @param jsonFlag
    */

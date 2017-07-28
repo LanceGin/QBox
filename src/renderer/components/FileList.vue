@@ -32,7 +32,8 @@
         prop="fsize"
         label="文件大小"
         sortable
-        width="150">
+        width="150"
+        :formatter="fsizeFormat">
       </el-table-column>
       <el-table-column
         prop="putTime"
@@ -57,6 +58,7 @@
 <script>
   // import Qiniu class
   import Qiniu from '../utils/qiniu';
+  import Util from '../utils/util';
   const moment = require('moment');
   const clipboard = require('electron').clipboard;
 
@@ -102,6 +104,10 @@
         date = date.toString();
         date = date.substring(0, date.length - 7);
         return moment.unix(date).format('YYYY-MM-DD HH:mm:ss');
+      },
+      // format file size
+      fsizeFormat(row) {
+        return Util.fsizeFormat(row.fsize);
       },
       // copy the link
       copyLink(row) {
