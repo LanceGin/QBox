@@ -58,4 +58,30 @@ export default class Qiniu {
 
     return rp(options);
   }
+
+  /**
+   * list the domain of a bucket
+   * @param ak     accessKey
+   * @param sk     secretKey
+   * @param bucket bucket name
+   */
+  static async domain(ak, sk, bucket) {
+    const mac = {
+      accessKey: ak,
+      secretKey: sk,
+    };
+    const requestURI = `http://api.qiniu.com/v6/domain/list?tbl=${bucket}`;
+    const reqBody = '';
+    const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
+
+    const options = {
+      uri: requestURI,
+      headers: {
+        Authorization: accessToken,
+      },
+      json: true,
+    };
+
+    return rp(options);
+  }
 }

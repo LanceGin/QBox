@@ -9,7 +9,7 @@
       :data="fileList"
       tooltip-effect="dark"
       style="width: 100%"
-      height="590"
+      height="540"
       stripe
       @selection-change="handleSelectionChange">
       <el-table-column
@@ -47,7 +47,7 @@
         <template scope="scope">
           <el-button type="text" size="small" icon="view"></el-button>
           <el-button type="text" size="small">删除</el-button>
-          <el-button type="text" size="small">替换</el-button>
+          <el-button type="text" size="small" @click="copyLink(scope.row)">复制</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -58,6 +58,7 @@
   // import Qiniu class
   import Qiniu from '../utils/qiniu';
   const moment = require('moment');
+  const clipboard = require('electron').clipboard;
 
   export default {
     name: 'file-list',
@@ -92,6 +93,7 @@
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
+      // format the time stamp
       dateFormat(row) {
         let date = row.putTime;
         if (date === undefined) {
@@ -101,15 +103,29 @@
         date = date.substring(0, date.length - 7);
         return moment.unix(date).format('YYYY-MM-DD HH:mm:ss');
       },
+      // copy the link
+      copyLink(row) {
+        console.log(row);
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        Qiniu.domain(accessKey, secretKey, bucket)
+          .then((data) => {
+            // get the latest domain
+            const domain = data[data.length - 1];
+            const link = `http://${domain}/row.key`;
+            clipboard.writeText(link);
+            this.$message('链接复制成功..💗');
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
     },
   };
 </script>
 
 <style scope>
-  #file-list-page {
-    max-height: 590px;
-    overflow: scroll;
-  }
   .upload-btn {
     position: fixed;
     left: 160px;
