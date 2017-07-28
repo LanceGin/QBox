@@ -46,7 +46,7 @@
         width="145">
         <template scope="scope">
           <el-button type="text" size="small" icon="view"></el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button type="text" size="small" @click="removeFile(scope.row)">删除</el-button>
           <el-button type="text" size="small" @click="copyLink(scope.row)">复制</el-button>
         </template>
       </el-table-column>
@@ -123,6 +123,29 @@
       // remove a file
       removeFile(row) {
         console.log(row);
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        // confirm to delete
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }).then(() => {
+          Qiniu.delete(accessKey, secretKey, bucket, row.key)
+            .then((data) => {
+              console.log(`${data}gdagdgdsgds`);
+              this.$message('文件删除成功..💗');
+              Qiniu.list(accessKey, secretKey, bucket)
+                .then((data) => {
+                  this.fileList = data.items;
+                })
+                .catch();
+            })
+            .catch();
+        }).catch(() => {
+          this.$message('取消删除');
+        });
       },
     },
   };

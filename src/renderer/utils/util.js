@@ -26,6 +26,15 @@ export default class Util {
   }
 
   /**
+   * UrlSafe Base64 Decode.
+   * @param jsonFlag
+   */
+  static urlsafeBase64Encode(jsonFlags) {
+    const encoded = new Buffer(jsonFlags).toString('base64');
+    return this.base64ToUrlSafe(encoded);
+  }
+
+  /**
    * generate AccessToken to manage the QBox.
    * @param mac         AK&SK object
    * @param requestURI  callback requestURI

@@ -84,4 +84,33 @@ export default class Qiniu {
 
     return rp(options);
   }
+
+  /**
+   * delete a file from a bucket
+   * @param ak     accessKey
+   * @param sk     secretKey
+   * @param bucket bucket name
+   * @patam key    item key
+   */
+  static async delete(ak, sk, bucket, key) {
+    const entry = `${bucket}:${key}`;
+    const encodedEntryURI = Util.urlsafeBase64Encode(entry);
+    const mac = {
+      accessKey: ak,
+      secretKey: sk,
+    };
+    const requestURI = `http://rs.qiniu.com/delete/${encodedEntryURI}`;
+    const reqBody = '';
+    const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
+
+    const options = {
+      uri: requestURI,
+      headers: {
+        Authorization: accessToken,
+      },
+      json: true,
+    };
+
+    return rp(options);
+  }
 }
