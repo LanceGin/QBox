@@ -12,13 +12,13 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'login',
-      component: require('@/pages/Login'),
-    },
-    {
-      path: '/bucket',
       name: 'bucket',
       component: require('@/pages/bucket'),
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: require('@/pages/login'),
     },
     {
       path: '/manage',
