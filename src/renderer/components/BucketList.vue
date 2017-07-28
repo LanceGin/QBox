@@ -49,7 +49,7 @@
           // 当token无效时触发
           this.$message(`${err.error.error}...💔`);
           localStorage.clear();
-          this.$router.push({ path: '/' });
+          this.$router.push({ path: '/login' });
         });
     },
     methods: {
