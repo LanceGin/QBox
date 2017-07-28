@@ -66,7 +66,7 @@
           localStorage.clear();
           this.fullscreenLoading = true;
           setTimeout(() => {
-            router.push({ path: '/' });
+            router.push({ path: '/login' });
             this.fullscreenLoading = false;
           }, 1000);
         }).catch(() => {
