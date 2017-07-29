@@ -84,8 +84,9 @@
   /* dtrag upload style */
   .el-upload-dragger {
     width: 100vw;
-    height: 540px;
+    height: 536px;
     border: 0;
+    border-radius: 0;
   }
   .el-upload-dragger .el-icon-upload {
     margin-top: 30vh;
