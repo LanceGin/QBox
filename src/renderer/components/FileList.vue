@@ -1,9 +1,24 @@
 <template>
   <div id="file-list-page">
+
     <div class="manage-btn-group">
       <el-button class="upload-btn" type="text" icon="upload">upload</el-button>
       <el-button class="refresh-btn" type="text" icon="time">refresh</el-button>
     </div>
+
+    <!-- preview -->
+    <el-dialog
+      title="预览"
+      :visible.sync="dialogVisible"
+      size="large">
+      <span>这里用来预览文件，暂时开发中</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- file list table -->
     <el-table
       ref="multipleTable"
       :data="fileList"
@@ -46,12 +61,13 @@
         label="操作"
         width="145">
         <template scope="scope">
-          <el-button type="text" size="small" icon="view"></el-button>
+          <el-button type="text" size="small" icon="view" @click="preview"></el-button>
           <el-button type="text" size="small" @click="removeFile(scope.row)">删除</el-button>
           <el-button type="text" size="small" @click="copyLink(scope.row)">复制</el-button>
         </template>
       </el-table-column>
     </el-table>
+
   </div>
 </template>
 
@@ -66,6 +82,7 @@
     name: 'file-list',
     data() {
       return {
+        dialogVisible: false,
         fileList: [],
         multipleSelection: [],
       };
@@ -152,6 +169,10 @@
         }).catch(() => {
           this.$message('取消删除');
         });
+      },
+      // preview file
+      preview() {
+        this.dialogVisible = true;
       },
     },
   };
