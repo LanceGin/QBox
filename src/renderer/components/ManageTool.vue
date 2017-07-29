@@ -6,8 +6,8 @@
     <div class="manage-btn">
       <el-button class="w-btn" type="text" icon="upload">上传</el-button>
       <el-button class="w-btn" type="text" icon="edit">刷新</el-button>
-      <el-button class="w-btn" type="text" icon="share">下载</el-button>
-      <el-button class="w-btn" type="text" icon="delete">删除</el-button>
+      <el-button class="w-btn" type="text" icon="share" :disabled="true">下载</el-button>
+      <el-button class="w-btn" type="text" icon="delete" :disabled="true">删除</el-button>
     </div>
     <div class="search-input">
       <el-input
