@@ -1,15 +1,8 @@
 <template>
   <div id="bucket-list-page">
-    <el-row :gutter="20">
-      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
-      <el-col :span="5">
-        <div class="grid-content bg-purple">
-          <el-button class="logout-btn" icon="upload2" @click="logout()" v-loading.fullscreen.lock="fullscreenLoading"></el-button>
-        </div>
-      </el-col>
-    </el-row>
+    <div class="logout">
+      <el-button type="text" class="logout-btn" icon="upload2" @click="logout()" v-loading.fullscreen.lock="fullscreenLoading"></el-button>
+    </div>
     <div v-for="bucket in bucketList" :key="bucket" class="bucket-item">
       <div class="item-icon"></div>
       <div class="item-name">
@@ -96,17 +89,18 @@
 <style scope>
   .logout-btn {
     position: fixed;
-    right: 10px;
+    right: 30px;
     top: 6px;
-    border: 0;
-    background: transparent;
     color: #fff;
-  }
-  .confirm-box {
-    width: 80vw;
   }
   .logout-btn:hover {
     color: #fff;
+  }
+  .el-icon-upload2 {
+    cursor: pointer;
+  }
+  .confirm-box {
+    width: 80vw;
   }
   .bucket-item {
     height: 50px;
@@ -138,6 +132,7 @@
     margin-right: 10px;
     background: transparent;
     color: #888;
+    cursor: pointer;
   }
   .item-handler i:hover {
     color: #2e84c7;
