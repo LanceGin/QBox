@@ -1,11 +1,6 @@
 <template>
   <div id="file-list-page">
-
-    <div class="manage-btn-group">
-      <el-button class="upload-btn" type="text" icon="upload">upload</el-button>
-      <el-button class="refresh-btn" type="text" icon="time">refresh</el-button>
-    </div>
-
+  
     <!-- preview -->
     <el-dialog
       title="预览"
@@ -179,31 +174,6 @@
 </script>
 
 <style scope>
-  .upload-btn {
-    position: fixed;
-    left: 160px;
-    top: 6px;
-    background: transparent;
-    color: #fff;
-    font-size: 18px;
-  }
-  .upload-btn:hover,
-  .upload-btn:focus {
-    color: #fff;
-  }
-  .refresh-btn {
-    position: fixed;
-    right: 40px;
-    top: 6px;
-    background: transparent;
-    color: #fff;
-    font-size: 18px;
-  }
-  .refresh-btn:hover,
-  .refresh-btn:focus {
-    color: #fff;
-    cursor: pointer;
-  }
   /* set table style */
   .el-table {
     color: #888;
