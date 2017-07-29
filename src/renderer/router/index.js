@@ -26,6 +26,11 @@ export default new Router({
       component: require('@/pages/manage'),
     },
     {
+      path: '/upload',
+      name: 'upload',
+      component: require('@/pages/upload'),
+    },
+    {
       path: '*',
       redirect: '/',
     },
