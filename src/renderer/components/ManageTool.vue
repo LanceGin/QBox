@@ -30,8 +30,8 @@
       };
     },
     methods: {
-      search(e) {
-        console.log(e);
+      search() {
+        // file list filter
       },
       upload() {
         this.$router.push({ path: `/upload?bucket=${this.bucket}` });

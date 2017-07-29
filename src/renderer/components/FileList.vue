@@ -90,9 +90,7 @@
         .then((data) => {
           this.fileList = data.items;
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch();
     },
     methods: {
       toggleSelection(rows) {
@@ -134,13 +132,10 @@
             clipboard.writeText(link);
             this.$message('链接复制成功..💗');
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch();
       },
       // remove a file
       removeFile(row) {
-        console.log(row);
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
@@ -151,8 +146,7 @@
           type: 'warning',
         }).then(() => {
           Qiniu.delete(accessKey, secretKey, bucket, row.key)
-            .then((data) => {
-              console.log(`${data}gdagdgdsgds`);
+            .then(() => {
               this.$message('文件删除成功..💗');
               Qiniu.list(accessKey, secretKey, bucket)
                 .then((data) => {
