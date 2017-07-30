@@ -3,9 +3,9 @@
 
 > QBox is a convenient manage tool for your [Qiniu](https://www.qiniu.com/) buckets. It is an open-source software and can be used in `OS X`, `Linux` and `Windows`, and it was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)
 
-### Screenshots
+## Screenshots
 
-#### Buket Panel
+#### Bucket Panel
 
 ![bucket panel](http://otwcctfiu.bkt.clouddn.com/bucket-panel.png)
 
@@ -17,7 +17,35 @@
 
 ![bucket panel](http://otwcctfiu.bkt.clouddn.com/upload-panel.png)
 
-### Contribute
+## Feature
+
+#### Bucket Panel
+
+- [x] Login by setting `accessKey` and `secretKey`.
+- [x] Logout by clearing localStorage (include `accessKey` and `secretKey`).
+- [x] List all buckets (include private).
+- [x] Manage files in a bucket, that will open a new `Manage Panel`.
+- [ ] Delete a existing bucket.
+- [ ] Create a new bucket.
+
+#### Manage Panel
+
+- [x] List all files in a specified bucket.
+- [ ] List all files with pagination.
+- [ ] Preview `image` and `media` file.
+- [x] Delete a existing file.
+- [ ] Delete a batch of files were checked.
+- [x] Copy the outer link of a file.
+- [x] Refresh the files in the bucket.
+- [ ] Download a existing file.(this feature will be put in `preview` modal)
+- [ ] Download a batch of files were checked.
+- [ ] Upload files. 
+
+## License
+
+[AGPL](https://github.com/LanceGin/QBox/blob/master/LICENSE)
+
+## Contribute
 
 ``` bash
 # install dependencies
@@ -35,4 +63,3 @@ npm test
 # lint all JS/Vue component files in `src/`
 npm run lint
 ```
-
