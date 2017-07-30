@@ -5,7 +5,7 @@
     </div>
     <div class="manage-btn">
       <el-button class="w-btn" type="text" icon="upload" @click="upload()">上传</el-button>
-      <el-button class="w-btn" type="text" icon="edit">刷新</el-button>
+      <el-button class="w-btn" type="text" icon="edit" @click="refresh()">刷新</el-button>
       <el-button class="w-btn" type="text" icon="share" :disabled="true">下载</el-button>
       <el-button class="w-btn" type="text" icon="delete" :disabled="true">删除</el-button>
     </div>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import Bus from '../utils/bus';
+
   export default {
     name: 'manage-tool',
     data() {
@@ -32,6 +34,9 @@
     methods: {
       search() {
         // file list filter
+      },
+      refresh() {
+        Bus.$emit('refresh');
       },
       upload() {
         this.$router.push({ path: `/upload?bucket=${this.bucket}` });

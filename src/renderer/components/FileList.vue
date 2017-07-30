@@ -70,6 +70,7 @@
   // import Qiniu class
   import Qiniu from '../utils/qiniu';
   import Util from '../utils/util';
+  import Bus from '../utils/bus';
   const moment = require('moment');
   const clipboard = require('electron').clipboard;
 
@@ -81,6 +82,18 @@
         fileList: [],
         multipleSelection: [],
       };
+    },
+    created() {
+      Bus.$on('refresh', () => {
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        Qiniu.list(accessKey, secretKey, bucket)
+          .then((data) => {
+            this.fileList = data.items;
+          })
+          .catch();
+      });
     },
     mounted() {
       const bucket = this.$route.query.bucket;
