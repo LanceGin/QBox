@@ -1,10 +1,23 @@
-# UNDER CONSTRUCTION...
 
-# Qbox
+# ![Qbox logo](http://otwcctfiu.bkt.clouddn.com/logo-blue.png)
 
-> file assistant.
+> QBox is a convenient manage tool for your [Qiniu](https://www.qiniu.com/) buckets. It is an open-source software and can be used in `OS X`, `Linux` and `Windows`, and it was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)
 
-#### Build Setup
+### Screenshots
+
+#### Buket Panel
+
+![bucket panel](http://otwcctfiu.bkt.clouddn.com/bucket-panel.png)
+
+#### Manage Panel
+
+![bucket panel](http://otwcctfiu.bkt.clouddn.com/manage-panel.png)
+
+#### Upload Panel
+
+![bucket panel](http://otwcctfiu.bkt.clouddn.com/upload-panel.png)
+
+### Contribute
 
 ``` bash
 # install dependencies
@@ -16,15 +29,10 @@ npm run dev
 # build electron application for production
 npm run build
 
-# run unit tests
+# run unit tests (no tests now)
 npm test
-
 
 # lint all JS/Vue component files in `src/`
 npm run lint
-
 ```
 
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[b31b441](https://github.com/SimulatedGREG/electron-vue/tree/b31b44123ad42acac12337c4955df4ead853f0df) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
