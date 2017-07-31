@@ -1,5 +1,5 @@
 /**
- *  @module   : Module to generate put policy and upload token 
+ *  @module   : Module to generate put policy and upload token
  *  @author   : Gin (gin.lance.inside@hotmail.com)
  */
 import Util from './util';
@@ -9,7 +9,7 @@ export default class PutPolicy {
    * Generate put policy class.
    *
    * @param scope       must have this attr.
-   *                    the other option could find in 
+   *                    the other option could find in
    *                    https://developer.qiniu.com/kodo/manual/1206/put-policy
    *
    * @return PutPolicy
@@ -55,21 +55,21 @@ export default class PutPolicy {
    * @return string
    */
   getFlags() {
-    let flags = {};
+    const flags = {};
     const attrs = ['scope', 'isPrefixalScope', 'insertOnly', 'saveKey', 'endUser',
       'returnUrl', 'returnBody', 'callbackUrl', 'callbackHost',
       'callbackBody', 'callbackBodyType', 'callbackFetchKey', 'persistentOps',
       'persistentNotifyUrl', 'persistentPipeline', 'fsizeLimit', 'fsizeMin',
-      'detectMime', 'mimeLimit', 'deleteAfterDays', 'fileType'
+      'detectMime', 'mimeLimit', 'deleteAfterDays', 'fileType',
     ];
 
-    for (let i = attrs.length - 1; i >= 0; i--) {
+    for (let i = attrs.length - 1; i >= 0; i -= 1) {
       if (this[attrs[i]] !== null) {
         flags[attrs[i]] = this[attrs[i]];
       }
     }
 
-    flags['deadline'] = this.expires + Math.floor(Date.now() / 1000);
+    flags.deadline = this.expires + Math.floor(Date.now() / 1000);
 
     return flags;
   }
@@ -86,7 +86,7 @@ export default class PutPolicy {
     const encodedFlags = Util.urlsafeBase64Encode(JSON.stringify(flags));
     const encoded = Util.hmacSha1(encodedFlags, mac.secretKey);
     const encodedSign = Util.base64ToUrlSafe(encoded);
-    const uploadToken = mac.accessKey + ':' + encodedSign + ':' + encodedFlags;
-    return uploadToken; 
+    const uploadToken = `${mac.accessKey}:${encodedSign}:${encodedFlags}`;
+    return uploadToken;
   }
 }
