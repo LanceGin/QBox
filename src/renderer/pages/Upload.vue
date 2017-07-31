@@ -14,9 +14,13 @@
     <div class="upload-panel">
       <el-upload
         class="upload-demo"
+        action="//up-z2.qiniu.com"
         drag
-        action="https://jsonplaceholder.typicode.com/posts/"
-        multiple>
+        :before-upload="beforeUpload"
+        :on-success="handleSuccess"
+        :on-error="handleError"
+        :on-progress="handleProgress"
+        :data="form">
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
       </el-upload>
@@ -26,6 +30,7 @@
 
 <script>
   import BucketHeader from '../components/BucketHeader';
+  import PutPolicy from '../utils/put_policy';
 
   export default {
     name: 'upload',
@@ -33,11 +38,39 @@
     data() {
       return {
         bucket: this.$route.query.bucket,
+        form: {},
+        headers: {},
       };
     },
     methods: {
       goback() {
         this.$router.push({ path: `/manage?bucket=${this.bucket}` });
+      },
+      handleSuccess(res) {
+        console.log(res);
+      },
+      handleError(err) {
+        console.log(err);
+      },
+      handleProgress(a) {
+        console.log(a);
+      },
+      async beforeUpload(file) {
+        // generate uploadToken
+        const options = {
+          scope: `${this.bucket}:${file.name}`,
+        };
+        const mac = {
+          accessKey: localStorage.accessKey,
+          secretKey: localStorage.secretKey,
+        };
+        const putPolicy = new PutPolicy(options);
+        const uploadToken = putPolicy.uploadToken(mac);
+        // form data
+        this.form = {
+          key: file.name,
+          token: uploadToken,
+        };
       },
     },
   };

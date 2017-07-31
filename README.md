@@ -39,7 +39,9 @@
 - [x] Refresh the files in the bucket.
 - [ ] Download a existing file.(this feature will be put in `preview` modal)
 - [ ] Download a batch of files were checked.
-- [ ] Upload files. 
+- [x] Upload a single file. 
+- [ ] Upload mutiple files.
+- [ ] Search filter.
 
 ## License
 
