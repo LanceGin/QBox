@@ -32,7 +32,7 @@
 
 - [x] List all files in a specified bucket.
 - [ ] List all files with pagination.
-- [ ] Preview `image` and `media` file.
+- [x] Preview `image` and `media` file.
 - [x] Delete a existing file.
 - [ ] Delete a batch of files were checked.
 - [x] Copy the outer link of a file.

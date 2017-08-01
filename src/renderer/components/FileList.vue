@@ -6,7 +6,9 @@
       title="预览"
       :visible.sync="dialogVisible"
       size="large">
-      <span>这里用来预览文件，暂时开发中</span>
+      <div class="preview">
+        <img :src="preview_url" class="preview-img">
+      </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -56,7 +58,7 @@
         label="操作"
         width="145">
         <template scope="scope">
-          <el-button type="text" size="small" icon="view" @click="preview"></el-button>
+          <el-button type="text" size="small" icon="view" @click="preview(scope.row)"></el-button>
           <el-button type="text" size="small" @click="removeFile(scope.row)">删除</el-button>
           <el-button type="text" size="small" @click="copyLink(scope.row)">复制</el-button>
         </template>
@@ -89,6 +91,7 @@
         multipleSelection: [],
         pagesize: 10,
         totalCount: 0,
+        preview_url: '',
       };
     },
     created() {
@@ -183,8 +186,23 @@
         });
       },
       // preview file
-      preview() {
+      preview(row) {
         this.dialogVisible = true;
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        Qiniu.domain(accessKey, secretKey, bucket)
+          .then((data) => {
+            // get the latest domain
+            const domain = data[data.length - 1];
+            const link = `http://${domain}/${row.key}`;
+            if (row.mimeType.indexOf('image') >= 0) {
+              this.preview_url = link;
+            } else {
+              this.preview_url = 'https://qiniu.staticfile.org/static/images/no-prev.6ae40070.png';
+            }
+          })
+          .catch();
       },
     },
   };
@@ -228,5 +246,12 @@
   }
   .el-table__body-wrapper {
     height: 475px !important;
+  }
+  .preview {
+    text-align: center;
+    height: 300px;
+  }
+  .preview-img {
+    height: 300px;
   }
 </style>
