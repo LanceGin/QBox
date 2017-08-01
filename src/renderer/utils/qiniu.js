@@ -9,6 +9,21 @@ const rp = require('request-promise');
  */
 export default class Qiniu {
   /**
+   * auto get the bucket zone
+   * @param ak       accessKey
+   * @param bucket   bucket name
+   */
+  static async autoZone(ak, bucket) {
+    const requestURI = `https://uc.qbox.me/v2/query?ak=${ak}&bucket=${bucket}`;
+    const options = {
+      uri: requestURI,
+      json: true,
+    };
+
+    return rp(options);
+  }
+
+  /**
    * list all buckets
    * @param ak   accessKey
    * @param sk   secretKey

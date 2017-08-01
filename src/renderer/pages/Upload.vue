@@ -14,7 +14,7 @@
     <div class="upload-panel">
       <el-upload
         class="upload-demo"
-        action="//up-z2.qiniu.com"
+        :action="uploadUrl"
         drag
         :before-upload="beforeUpload"
         :on-success="handleSuccess"
@@ -31,16 +31,25 @@
 <script>
   import BucketHeader from '../components/BucketHeader';
   import PutPolicy from '../utils/put_policy';
+  import Qiniu from '../utils/qiniu';
 
   export default {
     name: 'upload',
     components: { BucketHeader },
     data() {
       return {
+        uploadUrl: '',
         bucket: this.$route.query.bucket,
         form: {},
         headers: {},
       };
+    },
+    created() {
+      Qiniu.autoZone(localStorage.accessKey, this.bucket)
+        .then((zone) => {
+          this.uploadUrl = `//${zone.up.src.main[0]}`;
+        })
+        .catch();
     },
     methods: {
       goback() {
