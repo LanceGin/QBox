@@ -34,7 +34,7 @@
 - [ ] List all files with pagination.
 - [x] Preview `image` and `media` file.
 - [x] Delete a existing file.
-- [ ] Delete a batch of files were checked.
+- [x] Delete a batch of files were checked.
 - [x] Copy the outer link of a file.
 - [x] Refresh the files in the bucket.
 - [ ] Download a existing file.(this feature will be put in `preview` modal)

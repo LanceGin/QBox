@@ -113,4 +113,37 @@ export default class Qiniu {
 
     return rp(options);
   }
+
+  /**
+   *  batch management, delete, download etc.
+   *
+   */
+  static async batchDelete(ak, sk, bucket, items) {
+    const mac = {
+      accessKey: ak,
+      secretKey: sk,
+    };
+
+    let query = '';
+    items.forEach((item) => {
+      const entry = `${bucket}:${item.key}`;
+      const encodedEntryURI = Util.urlsafeBase64Encode(entry);
+      query += `op=/delete/${encodedEntryURI}&`;
+    });
+    query = query.substring(0, query.length - 1);
+
+    const requestURI = `http://rs.qiniu.com/batch?${query}`;
+    const reqBody = '';
+    const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
+
+    const options = {
+      uri: requestURI,
+      headers: {
+        Authorization: accessToken,
+      },
+      json: true,
+    };
+
+    return rp(options);
+  }
 }

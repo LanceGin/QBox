@@ -95,6 +95,7 @@
       };
     },
     created() {
+      // refresh files
       Bus.$on('refresh', () => {
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
@@ -106,6 +107,42 @@
           })
           .catch();
       });
+
+      // batch delete
+      Bus.$on('batchDelete', () => {
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        // confirm to delete
+        this.$confirm('此操作将永久删除文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }).then(() => {
+          Qiniu.batchDelete(accessKey, secretKey, bucket, this.multipleSelection)
+            .then(() => {
+              this.$message('文件删除成功..💗');
+              Qiniu.list(accessKey, secretKey, bucket)
+                .then((data) => {
+                  this.fileList = data.items;
+                })
+                .catch();
+            })
+            .catch();
+        }).catch(() => {
+          this.$message('取消删除');
+        });
+      });
+
+      // batch download
+      Bus.$on('batchDownload', () => {
+        console.log('批量下载');
+      });
+    },
+    destroyed() {
+      Bus.$off('refresh');
+      Bus.$off('batchDelete');
+      Bus.$off('batchDownload');
     },
     mounted() {
       const bucket = this.$route.query.bucket;
@@ -130,6 +167,7 @@
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
+        Bus.$emit('batchShowStatus', this.multipleSelection);
       },
       // format the time stamp
       dateFormat(row) {
