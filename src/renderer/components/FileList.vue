@@ -10,8 +10,8 @@
         <img :src="preview_url" class="preview-img">
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button @click="dialogVisible = false">复 制</el-button>
+        <el-button type="primary" @click="dialogVisible = false">下 载</el-button>
       </span>
     </el-dialog>
 
