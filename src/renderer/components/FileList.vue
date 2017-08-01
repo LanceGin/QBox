@@ -125,6 +125,7 @@
               Qiniu.list(accessKey, secretKey, bucket)
                 .then((data) => {
                   this.fileList = data.items;
+                  this.totalCount = data.items.length;
                 })
                 .catch();
             })
@@ -215,6 +216,7 @@
               Qiniu.list(accessKey, secretKey, bucket)
                 .then((data) => {
                   this.fileList = data.items;
+                  this.totalCount = data.items.length;
                 })
                 .catch();
             })

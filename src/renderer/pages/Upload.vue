@@ -16,6 +16,7 @@
         class="upload-demo"
         :action="uploadUrl"
         drag
+        :on-remove="handleRemove"
         :before-upload="beforeUpload"
         :on-success="handleSuccess"
         :on-error="handleError"
@@ -63,6 +64,16 @@
       },
       handleProgress(a) {
         console.log(a);
+      },
+      handleRemove(item) {
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        Qiniu.delete(accessKey, secretKey, bucket, item.response.key)
+          .then(() => {
+            this.$message('删除成功...💗');
+          })
+          .catch();
       },
       async beforeUpload(file) {
         // generate uploadToken
@@ -124,13 +135,27 @@
     color: #fff;
   }
   /* dtrag upload style */
+  .el-upload {
+    float: right;
+  }
   .el-upload-dragger {
-    width: 100vw;
+    width: 61vw;
     height: 536px;
     border: 0;
     border-radius: 0;
+    background: transparent;
   }
   .el-upload-dragger .el-icon-upload {
     margin-top: 30vh;
+  }
+  .el-upload-list {
+    position: absolute;
+    width: 35vw;
+    top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 540px;
+    border-right: 1px solid #eee;
+    overflow: scroll;
   }
 </style>
