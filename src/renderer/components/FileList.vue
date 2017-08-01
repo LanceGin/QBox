@@ -19,7 +19,7 @@
       :data="fileList"
       tooltip-effect="dark"
       style="width: 100%"
-      height="540"
+      height="500"
       stripe
       @selection-change="handleSelectionChange">
       <el-table-column
@@ -62,7 +62,13 @@
         </template>
       </el-table-column>
     </el-table>
-
+    <div align="center">
+      <el-pagination
+        :page-size="pagesize"
+        layout="total, prev, pager, next"
+        :total="totalCount">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -81,6 +87,8 @@
         dialogVisible: false,
         fileList: [],
         multipleSelection: [],
+        pagesize: 10,
+        totalCount: 0,
       };
     },
     created() {
@@ -91,6 +99,7 @@
         Qiniu.list(accessKey, secretKey, bucket)
           .then((data) => {
             this.fileList = data.items;
+            this.totalCount = data.items.length;
           })
           .catch();
       });
@@ -102,6 +111,7 @@
       Qiniu.list(accessKey, secretKey, bucket)
         .then((data) => {
           this.fileList = data.items;
+          this.totalCount = data.items.length;
         })
         .catch();
     },
@@ -213,6 +223,10 @@
   }
   .el-table::after,
   .el-table::before {
-    background: #fff;
+    background: transparent;
+    z-index: 1;
+  }
+  .el-table__body-wrapper {
+    height: 475px !important;
   }
 </style>
