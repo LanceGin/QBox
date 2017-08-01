@@ -3,7 +3,7 @@
   
     <!-- preview -->
     <el-dialog
-      title="预览"
+      :title="preview_name"
       :visible.sync="dialogVisible"
       size="large">
       <div class="preview">
@@ -92,6 +92,7 @@
         pagesize: 10,
         totalCount: 0,
         preview_url: '',
+        preview_name: '',
       };
     },
     created() {
@@ -236,6 +237,7 @@
             // get the latest domain
             const domain = data[data.length - 1];
             const link = `http://${domain}/${row.key}`;
+            this.preview_name = row.key;
             if (row.mimeType.indexOf('image') >= 0) {
               this.preview_url = link;
             } else {
