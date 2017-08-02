@@ -6,8 +6,8 @@
     <div class="manage-btn">
       <el-button class="w-btn" type="text" @click="upload()"><i class="iconfont icon-upload"></i>  上传</el-button>
       <el-button class="w-btn" type="text" @click="refresh()"><i class="iconfont icon-202023"></i> 刷新</el-button>
-      <el-button class="w-btn" type="text" :disabled="batchShow" @click="batchDownload()"><i class="iconfont icon-download"></i> 下载</el-button>
       <el-button class="w-btn" type="text" icon="delete" :disabled="batchShow" @click="batchDelete()">删除</el-button>
+      <el-button class="w-btn" type="text" :disabled="true" @click="batchDownload()"><i class="iconfont icon-download"></i> 下载</el-button>
     </div>
     <div class="search-input">
       <el-input
