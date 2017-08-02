@@ -21,13 +21,15 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "qbox",
-    "appId": "org.simulatedgreg.electron-vue",
+    "productName": "QBox",
+    "appId": "cc.lancegin.qbox",
     "directories": {
       "output": "build"
     },
     "files": [
-      "dist/electron/**/*"
+      "dist/electron/**/*",
+      "node_modules/",
+      "package.json"
     ],
     "dmg": {
       "contents": [
