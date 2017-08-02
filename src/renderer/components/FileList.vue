@@ -10,7 +10,7 @@
         <img :src="preview_url" class="preview-img">
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">复 制</el-button>
+        <el-button @click="previewCopy()">复 制</el-button>
         <el-button type="primary" @click="dialogVisible = false">下 载</el-button>
       </span>
     </el-dialog>
@@ -243,6 +243,22 @@
             } else {
               this.preview_url = 'https://qiniu.staticfile.org/static/images/no-prev.6ae40070.png';
             }
+          })
+          .catch();
+      },
+      // copy link in the preview modal
+      previewCopy() {
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        Qiniu.domain(accessKey, secretKey, bucket)
+          .then((data) => {
+            // get the latest domain
+            const domain = data[data.length - 1];
+            const link = `http://${domain}/${this.preview_name}`;
+            clipboard.writeText(link);
+            this.dialogVisible = false;
+            this.$message('链接复制成功..💗');
           })
           .catch();
       },
