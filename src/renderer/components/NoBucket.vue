@@ -57,12 +57,12 @@
 
 <style scope>
   .nothing-img {
-    padding-top: 80px;
     text-align: center;
     height: 260px;
     background: url(../../../static/img/nothing.png) no-repeat;
     background-size: 320px 198.35px;
     background-position: 40px 80px;
+    margin-bottom: 80px;
   }
   .nothing-img img {
     width: 80vw;
