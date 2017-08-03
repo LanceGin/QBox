@@ -48,7 +48,7 @@
     created() {
       Qiniu.autoZone(localStorage.accessKey, this.bucket)
         .then((zone) => {
-          this.uploadUrl = `//${zone.up.src.main[0]}`;
+          this.uploadUrl = `http://${zone.up.src.main[0]}`;
         })
         .catch();
     },
@@ -142,8 +142,12 @@
     width: 61vw;
     height: 536px;
     border: 0;
+    border-left: 1px solid #eee;
     border-radius: 0;
     background: transparent;
+  }
+  .el-upload-dragger:hover {
+    border: 1px dashed #2e84c7;
   }
   .el-upload-dragger .el-icon-upload {
     margin-top: 30vh;
@@ -152,10 +156,8 @@
     position: absolute;
     width: 35vw;
     top: 100px;
-    padding-left: 20px;
-    padding-right: 20px;
+    left: 2vw;
     height: 540px;
-    border-right: 1px solid #eee;
     overflow: scroll;
   }
 </style>
