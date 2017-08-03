@@ -27,9 +27,7 @@
       "output": "build"
     },
     "files": [
-      "dist/electron/**/*",
-      "node_modules/",
-      "package.json"
+      "dist/electron/**/*"
     ],
     "dmg": {
       "contents": [
