@@ -103,15 +103,16 @@
     width: 80vw;
   }
   .bucket-item {
-    height: 50px;
+    height: 60px;
     border-bottom: 1px #eee solid;
-    padding: 5px 20px;
+    padding: 0 20px;
   }
   .bucket-item:hover {
     background: #eee;
   }
   .item-icon {
     float: left;
+    margin-top: 5px;
     height: 48px;
     width: 48px;
     background: url("../../../static/img/bucket.png") no-repeat;
@@ -120,12 +121,16 @@
   }
   .item-name {
     float: left;
-    padding-left: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
     color: #888;
+  }
+  .item-name p {
+    -webkit-margin-before: 0;
   }
   .item-handler {
     float: right;
-    padding-top: 15px;
+    margin-top: 20px;
   }
   .item-handler i {
     border: 0;
