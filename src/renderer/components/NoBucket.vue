@@ -56,6 +56,9 @@
 </script>
 
 <style scope>
+  body {
+    background: #fff;
+  }
   .nothing-img {
     text-align: center;
     height: 260px;
