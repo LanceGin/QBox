@@ -4,7 +4,7 @@
       <el-tag class="bucket-name">{{ bucket }}</el-tag>
     </div>
     <div class="manage-btn">
-      <el-button class="w-btn" type="text" icon="upload2" @click="upload()"> 上传</el-button>
+      <el-button class="w-btn" type="text" icon="upload" @click="upload()"> 上传</el-button>
       <el-button class="w-btn" type="text" icon="time" @click="refresh()"> 刷新</el-button>
       <el-button class="w-btn" type="text" icon="delete" :disabled="batchShow" @click="batchDelete()">删除</el-button>
       <el-button class="w-btn" type="text" :disabled="true" icon="document" @click="batchDownload()"> 下载</el-button>
@@ -47,6 +47,7 @@
     methods: {
       search() {
         // file list filter
+        Bus.$emit('search', this.filter);
       },
       refresh() {
         Bus.$emit('refresh');

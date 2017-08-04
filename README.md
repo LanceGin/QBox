@@ -42,7 +42,7 @@
 - [ ] Download a batch of files were checked.
 - [x] Upload a single file. 
 - [ ] Upload mutiple files.
-- [ ] Search filter.
+- [x] Search filter.
 
 ## License
 

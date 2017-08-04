@@ -54,12 +54,12 @@ export default class Qiniu {
    * @param sk     secretKey
    * @param bucket bucket name
    */
-  static async list(ak, sk, bucket) {
+  static async list(ak, sk, bucket, marker = '', prefix = '') {
     const mac = {
       accessKey: ak,
       secretKey: sk,
     };
-    const requestURI = `http://rsf.qbox.me/list?bucket=${bucket}`;
+    const requestURI = `http://rsf.qbox.me/list?bucket=${bucket}&limit=100&marker=${marker}&prefix=${prefix}`;
     const reqBody = '';
     const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
 

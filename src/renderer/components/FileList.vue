@@ -93,6 +93,7 @@
         totalCount: 0,
         preview_url: '',
         preview_name: '',
+        marker: '',
       };
     },
     created() {
@@ -139,6 +140,20 @@
       // batch download
       Bus.$on('batchDownload', () => {
         console.log('批量下载');
+      });
+
+      // search filter
+      Bus.$on('search', (filter) => {
+        console.log(`search ${filter}`);
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        Qiniu.list(accessKey, secretKey, bucket, this.marker, filter)
+          .then((data) => {
+            this.fileList = data.items;
+            this.totalCount = data.items.length;
+          })
+          .catch();
       });
     },
     destroyed() {
