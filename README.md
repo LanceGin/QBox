@@ -76,3 +76,5 @@ npm test
 # lint all JS/Vue component files in `src/`
 npm run lint
 ```
+
+## [中文文档](https://github.com/LanceGin/QBox/blob/master/README_zh.md)
