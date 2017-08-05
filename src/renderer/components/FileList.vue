@@ -127,7 +127,7 @@
               this.$message('文件删除成功..💗');
               Qiniu.list(accessKey, secretKey, bucket)
                 .then((data) => {
-                  this.marker = data.marker;
+                  this.marker = data.marker == null ? '' : data.marker;
                   this.fileList = data.items;
                 })
                 .catch();
@@ -228,7 +228,7 @@
               // need to refresh.
               Qiniu.list(accessKey, secretKey, bucket)
                 .then((data) => {
-                  this.marker = data.marker;
+                  this.marker = data.marker == null ? '' : data.marker;
                   this.fileList = data.items;
                 })
                 .catch();
