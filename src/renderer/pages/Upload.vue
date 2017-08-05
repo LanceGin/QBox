@@ -56,14 +56,11 @@
       goback() {
         this.$router.push({ path: `/manage?bucket=${this.bucket}` });
       },
-      handleSuccess(res) {
-        console.log(res);
+      handleSuccess() {
       },
-      handleError(err) {
-        console.log(err);
+      handleError() {
       },
-      handleProgress(a) {
-        console.log(a);
+      handleProgress() {
       },
       handleRemove(item) {
         const bucket = this.$route.query.bucket;

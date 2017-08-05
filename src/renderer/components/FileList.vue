@@ -64,7 +64,12 @@
       </el-table-column>
       <template slot="append">
         <div class="loadmore">
-          <el-button align="center" type="text" v-if="marker != ''" size="small">加载更多</el-button>
+          <el-button
+            align="center"
+            type="text"
+            v-if="marker != ''"
+            size="small"
+            @click="loadMore()">加载更多</el-button>
         </div>
       </template>
     </el-table>
@@ -89,6 +94,7 @@
         preview_url: '',
         preview_name: '',
         marker: '',
+        filter: '',
       };
     },
     created() {
@@ -99,8 +105,8 @@
         const secretKey = localStorage.secretKey;
         Qiniu.list(accessKey, secretKey, bucket)
           .then((data) => {
+            this.marker = data.marker == null ? '' : data.marker;
             this.fileList = data.items;
-            this.totalCount = data.items.length;
           })
           .catch();
       });
@@ -121,8 +127,8 @@
               this.$message('文件删除成功..💗');
               Qiniu.list(accessKey, secretKey, bucket)
                 .then((data) => {
+                  this.marker = data.marker;
                   this.fileList = data.items;
-                  this.totalCount = data.items.length;
                 })
                 .catch();
             })
@@ -139,14 +145,15 @@
 
       // search filter
       Bus.$on('search', (filter) => {
-        console.log(`search ${filter}`);
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
-        Qiniu.list(accessKey, secretKey, bucket, this.marker, filter)
+        Qiniu.list(accessKey, secretKey, bucket, '', filter)
           .then((data) => {
+            console.log(data);
+            this.filter = filter;
+            this.marker = data.marker == null ? '' : data.marker;
             this.fileList = data.items;
-            this.totalCount = data.items.length;
           })
           .catch();
       });
@@ -163,22 +170,12 @@
       Qiniu.list(accessKey, secretKey, bucket)
         .then((data) => {
           console.log(data);
-          this.marker = data.marker;
+          this.marker = data.marker == null ? '' : data.marker;
           this.fileList = data.items;
-          this.totalCount = data.items.length;
         })
         .catch();
     },
     methods: {
-      toggleSelection(rows) {
-        if (rows) {
-          rows.forEach((row) => {
-            this.$refs.multipleTable.toggleRowSelection(row);
-          });
-        } else {
-          this.$refs.multipleTable.clearSelection();
-        }
-      },
       handleSelectionChange(val) {
         this.multipleSelection = val;
         Bus.$emit('batchShowStatus', this.multipleSelection);
@@ -226,10 +223,13 @@
           Qiniu.delete(accessKey, secretKey, bucket, row.key)
             .then(() => {
               this.$message('文件删除成功..💗');
+              // TODO
+              // just remove items from local datas, do not
+              // need to refresh.
               Qiniu.list(accessKey, secretKey, bucket)
                 .then((data) => {
+                  this.marker = data.marker;
                   this.fileList = data.items;
-                  this.totalCount = data.items.length;
                 })
                 .catch();
             })
@@ -284,6 +284,19 @@
             const domain = data[data.length - 1];
             const link = `http://${domain}/${this.preview_name}?attname=${this.preview_name}.${this.preview_name.split('.')[1]}`;
             location.href = link;
+          })
+          .catch();
+      },
+      // loadMore feature
+      loadMore() {
+        console.log(this.filter);
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        Qiniu.list(accessKey, secretKey, bucket, this.marker, this.filter)
+          .then((data) => {
+            this.marker = data.marker == null ? '' : data.marker;
+            this.fileList.push(...data.items);
           })
           .catch();
       },
