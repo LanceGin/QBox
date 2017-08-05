@@ -26,8 +26,6 @@
 - [x] Logout by clearing localStorage (include `accessKey` and `secretKey`).
 - [x] List all buckets (include private).
 - [x] Manage files in a bucket, that will open a new `Manage Panel`.
-- [ ] Delete a existing bucket.
-- [ ] Create a new bucket.
 
 #### Manage Panel
 
@@ -42,8 +40,19 @@
 - [x] Download a existing file.(this feature will be put in `preview` modal)
 - [x] Upload a single file. 
 - [x] Search filter.
+
+## TODO
+
+#### Bucket Panel
+
+- [ ] Delete a existing bucket.
+- [ ] Create a new bucket.
+
+#### Manage Panel
+
 - [ ] Upload mutiple files.
 - [ ] Download a batch of files were checked.
+- [ ] Rename resouces.
 
 ## License
 
