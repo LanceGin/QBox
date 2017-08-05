@@ -25,6 +25,7 @@ function createWindow() {
       submenu: [
         {
           label: 'Aboue QBox',
+          role: 'about',
         },
         {
           label: 'Check for Updates',
