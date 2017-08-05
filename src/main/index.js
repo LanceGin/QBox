@@ -21,34 +21,61 @@ function createWindow() {
    */
   const template = [
     {
-      label: 'QBox',
-      submenu: [
-        {
-          label: 'Aboue QBox',
-          role: 'about',
-        },
-        {
-          label: 'Check for Updates',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          type: 'separator',
-        },
-        {
-          label: 'Quit',
-          role: 'quit',
-        },
-      ],
-    },
-    {
       role: 'editMenu',
     },
     {
       role: 'windowMenu',
     },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Document',
+          click() { require('electron').shell.openExternal('https://github.com/LanceGin/QBox/blob/master/README.md'); },
+        },
+        {
+          label: '中文文档',
+          click() { require('electron').shell.openExternal('https://github.com/LanceGin/QBox/blob/master/README_zh.md'); },
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: 'Open Source',
+          click() { require('electron').shell.openExternal('https://github.com/LanceGin/QBox'); },
+        },
+        {
+          label: 'License',
+          click() { require('electron').shell.openExternal('https://github.com/LanceGin/QBox/blob/master/LICENSE'); },
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: 'About Author(LanceGin)',
+          click() { require('electron').shell.openExternal('http://www.lancegin.cc'); },
+        },
+      ],
+    },
   ];
+
+  if (process.platform === 'darwin') {
+    template.unshift({
+      label: app.getName(),
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'services', submenu: [] },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' },
+      ],
+    });
+  }
+
   mainMenu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(mainMenu);
 
