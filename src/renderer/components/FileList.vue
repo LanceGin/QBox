@@ -21,7 +21,6 @@
       :data="fileList"
       tooltip-effect="dark"
       style="width: 100%"
-      height="500"
       stripe
       @selection-change="handleSelectionChange">
       <el-table-column
@@ -63,14 +62,12 @@
           <el-button type="text" size="small" @click="copyLink(scope.row)">复制</el-button>
         </template>
       </el-table-column>
+      <template slot="append">
+        <div class="loadmore">
+          <el-button align="center" type="text" v-if="marker != ''" size="small">加载更多</el-button>
+        </div>
+      </template>
     </el-table>
-    <div align="center">
-      <el-pagination
-        :page-size="pagesize"
-        layout="total, prev, pager, next"
-        :total="totalCount">
-      </el-pagination>
-    </div>
   </div>
 </template>
 
@@ -89,8 +86,6 @@
         dialogVisible: false,
         fileList: [],
         multipleSelection: [],
-        pagesize: 10,
-        totalCount: 0,
         preview_url: '',
         preview_name: '',
         marker: '',
@@ -167,6 +162,8 @@
       const secretKey = localStorage.secretKey;
       Qiniu.list(accessKey, secretKey, bucket)
         .then((data) => {
+          console.log(data);
+          this.marker = data.marker;
           this.fileList = data.items;
           this.totalCount = data.items.length;
         })
@@ -298,6 +295,7 @@
   /* set table style */
   .el-table {
     color: #888;
+    max-height: 540px;
   }
   .el-table__header-wrapper thead div {
     background: #fff;
@@ -331,7 +329,12 @@
     z-index: 1;
   }
   .el-table__body-wrapper {
-    height: 475px !important;
+    max-height: 520px !important;
+  }
+  .loadmore {
+    width: 100vw;
+    text-align: center;
+    margin-top: 5px;
   }
   .preview {
     text-align: center;
