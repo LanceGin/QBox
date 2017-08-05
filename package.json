@@ -22,7 +22,7 @@
   },
   "build": {
     "productName": "QBox",
-    "appId": "cc.lancegin.qbox",
+    "appId": "com.artisanland.qbox",
     "directories": {
       "output": "build"
     },
