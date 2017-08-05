@@ -1,6 +1,7 @@
 
 # ![Qbox logo](http://otwcctfiu.bkt.clouddn.com/logo-blue.png)
 
+
 > QBox is a convenient manage tool for your [Qiniu](https://www.qiniu.com/) buckets. It is an open-source software and can be used on `OS X`, `Linux` and `Windows`, and it was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)
 
 ## Screenshots
@@ -31,7 +32,7 @@
 #### Manage Panel
 
 - [x] List all files in a specified bucket.
-- [ ] List all files with pagination.
+- [x] List all files with pagination.
 - [x] Sort by `file name`, `file type`, `file size` or `modified time`.
 - [x] Preview `image` and `media` file.
 - [x] Delete a existing file.
@@ -39,10 +40,10 @@
 - [x] Copy the outer link of a file.
 - [x] Refresh the files in the bucket.
 - [x] Download a existing file.(this feature will be put in `preview` modal)
-- [ ] Download a batch of files were checked.
 - [x] Upload a single file. 
-- [ ] Upload mutiple files.
 - [x] Search filter.
+- [ ] Upload mutiple files.
+- [ ] Download a batch of files were checked.
 
 ## License
 
