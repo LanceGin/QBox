@@ -1,6 +1,6 @@
 {
   "name": "qbox",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "author": "lancegin",
   "description": "assistant",
   "license": "AGPL",
@@ -27,7 +27,9 @@
       "output": "build"
     },
     "files": [
-      "dist/electron/**/*"
+      "dist/electron",
+      "node_modules/",
+      "package.json"
     ],
     "dmg": {
       "contents": [
@@ -45,7 +47,12 @@
       ]
     },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "target": "dmg"
+    },
+    "mas": {
+      "entitlements": "./parent.plist",
+      "entitlementsInherit": "./child.plist"
     },
     "win": {
       "icon": "build/icons/icon.ico"
