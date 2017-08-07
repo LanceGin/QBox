@@ -43,6 +43,11 @@
 
 ## TODO
 
+#### MenuBar
+
+- [ ] Set default bucket.
+- [ ] Drag to MenuBar icon to upload.
+
 #### Bucket Panel
 
 - [ ] Delete a existing bucket.
