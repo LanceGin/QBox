@@ -16,6 +16,9 @@
           <el-input type="password" v-model="form.sk" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
+      <div class="notice">
+        <p>不知道key? <el-button type="text" @click="openPortal()">去七牛查看</el-button></p>
+      </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button @click="setKey()" v-loading.fullscreen.lock="fullscreenLoading">确 定</el-button>
@@ -51,6 +54,10 @@
           this.fullscreenLoading = false;
         }, 3000);
       },
+      // go to qiniu portal to find key
+      openPortal() {
+        require('electron').shell.openExternal('https://portal.qiniu.com/user/key');
+      },
     },
   };
 </script>
@@ -84,5 +91,14 @@
   }
   .el-dialog__body {
     padding-bottom: 0;
+  }
+  .notice {
+    margin-left: 170px;
+    color: #888;
+    font-size: 14px;
+    margin-top: -20px;
+  }
+  .dialog-footer {
+    margin-top: -10px;
   }
 </style>
