@@ -64,6 +64,7 @@ function createWindow() {
       label: app.getName(),
       submenu: [
         { role: 'about' },
+        { role: 'toggledevtools' },
         { type: 'separator' },
         { role: 'services', submenu: [] },
         { type: 'separator' },

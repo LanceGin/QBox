@@ -1,6 +1,6 @@
 {
   "name": "qbox",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "author": "lancegin",
   "description": "assistant",
   "license": "AGPL",
@@ -48,13 +48,7 @@
     },
     "mac": {
       "icon": "build/icons/icon.icns",
-      "target": ["mas", "dmg"],
-      "entitlements": "./parent.plist",
-      "entitlementsInherit": "./child.plist"
-    },
-    "mas": {
-      "entitlements": "./parent.plist",
-      "entitlementsInherit": "./child.plist"
+      "target": ["mas", "dmg", "pkg"]
     },
     "win": {
       "icon": "build/icons/icon.ico"
