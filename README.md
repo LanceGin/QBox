@@ -55,7 +55,7 @@
 
 #### Manage Panel
 
-- [ ] Add enter event to search box.
+- [x] Add enter event to search box.
 - [ ] Upload mutiple files.
 - [ ] Download a batch of files were checked.
 - [ ] Rename resouces.
