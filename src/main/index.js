@@ -24,7 +24,25 @@ function createWindow() {
       role: 'editMenu',
     },
     {
-      role: 'windowMenu',
+      label: 'Window',
+      submenu: [
+        {
+          role: 'minimize',
+        },
+        {
+          role: 'close',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: 'QBox',
+          accelerator: 'CmdOrCtrl+O',
+          click: () => {
+            app.emit('activate');
+          },
+        },
+      ],
     },
     {
       role: 'help',
