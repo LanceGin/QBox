@@ -24,7 +24,25 @@ function createWindow() {
       role: 'editMenu',
     },
     {
-      role: 'windowMenu',
+      label: 'Window',
+      submenu: [
+        {
+          role: 'minimize',
+        },
+        {
+          role: 'close',
+        },
+        {
+          type: 'separator',
+        },
+        {
+          label: 'QBox',
+          accelerator: 'CmdOrCtrl+O',
+          click: () => {
+            app.emit('activate');
+          },
+        },
+      ],
     },
     {
       role: 'help',
@@ -64,7 +82,6 @@ function createWindow() {
       label: app.getName(),
       submenu: [
         { role: 'about' },
-        { role: 'toggledevtools' },
         { type: 'separator' },
         { role: 'services', submenu: [] },
         { type: 'separator' },

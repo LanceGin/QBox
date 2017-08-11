@@ -14,7 +14,8 @@
         placeholder="搜索"
         icon="search"
         v-model="filter"
-        :on-icon-click="search">
+        :on-icon-click="search"
+        @keyup.enter.native="search">
       </el-input>
     </div>
   </div>
