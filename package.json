@@ -49,7 +49,7 @@
     "mac": {
       "icon": "build/icons/icon.icns",
       "target": ["mas", "dmg", "pkg"],
-      "bundleVersion": "1.1.1"
+      "bundleVersion": "1.1.2"
     },
     "win": {
       "icon": "build/icons/icon.ico"
