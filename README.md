@@ -1,6 +1,8 @@
 
 # ![Qbox logo](http://otwcctfiu.bkt.clouddn.com/logo-blue.png)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/soh7mapv45levrxy?svg=true)](https://ci.appveyor.com/project/LanceGin/qbox)
+
 
 > QBox is a convenient manage tool for your [Qiniu](https://www.qiniu.com/) buckets. It is an open-source software and can be used on `OS X`, `Linux` and `Windows`, and it was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)
 
