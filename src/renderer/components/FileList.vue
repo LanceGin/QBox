@@ -83,6 +83,7 @@
   import Bus from '../utils/bus';
   const moment = require('moment');
   const clipboard = require('electron').clipboard;
+  const webContents = require('electron').remote.getCurrentWebContents();
 
   export default {
     name: 'file-list',
@@ -283,7 +284,7 @@
             // get the latest domain
             const domain = data[data.length - 1];
             const link = `http://${domain}/${this.preview_name}?attname=${this.preview_name}.${this.preview_name.split('.')[1]}`;
-            location.href = link;
+            webContents.loadURL(link);
           })
           .catch();
       },
