@@ -10,7 +10,7 @@
       </div>
       <div class="item-handler">
         <i class="el-icon-edit" @click="manage(bucket)"></i>
-        <i class="el-icon-delete"></i>
+        <i class="el-icon-delete" @click="drop(bucket)"></i>
       </div>
     </div>
     <div class="mkbucket">
@@ -118,6 +118,19 @@
             this.fullscreenLoading = false;
             this.$message(`${err.error.error}...💔`);
           });
+      },
+      // drop an exist bucket
+      drop(bucket) {
+        this.$confirm(`确定淘汰 ${bucket} ?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          customClass: 'confirm-box',
+        }).then(() => {
+          this.$message(`成功淘汰${bucket}...💗`);
+        }).catch(() => {
+          this.$message('差点手误...💔');
+        });
       },
       // logout function.
       // keys will be clear.
