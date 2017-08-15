@@ -123,7 +123,7 @@
       drop(bucket) {
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
-        this.$confirm(`确定淘汰 ${bucket} ?`, '提示', {
+        this.$confirm(`确定删除 ${bucket} ?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
@@ -136,7 +136,7 @@
                 .then((data) => {
                   this.bucketList = data;
                   this.fullscreenLoading = false;
-                  this.$message(`成功淘汰${bucket}...💗`);
+                  this.$message(`成功删除 ${bucket}...💗`);
                 });
             })
             .catch((err) => {
