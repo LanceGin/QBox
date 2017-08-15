@@ -53,7 +53,7 @@
 #### Bucket Panel
 
 - [ ] Delete a existing bucket.
-- [ ] Create a new bucket.
+- [x] Create a new bucket.
 
 #### Manage Panel
 

@@ -100,7 +100,24 @@
     methods: {
       // create new bucket
       mkbucket() {
-        this.$message('mkbucket');
+        this.fullscreenLoading = true;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+
+        Qiniu.mkbucket(accessKey, secretKey, this.newBucket.name, this.newBucket.region)
+          .then(() => {
+            Qiniu.buckets(accessKey, secretKey)
+              .then((data) => {
+                this.dialogFormVisible = false;
+                this.fullscreenLoading = false;
+                this.bucketList = data;
+                this.$message(`仓库 ${this.newBucket.name} 创建成功..💗`);
+              });
+          })
+          .catch((err) => {
+            this.fullscreenLoading = false;
+            this.$message(`${err.error.error}...💔`);
+          });
       },
       // logout function.
       // keys will be clear.
