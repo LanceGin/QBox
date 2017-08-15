@@ -10,8 +10,36 @@
       </div>
       <div class="item-handler">
         <i class="el-icon-edit" @click="manage(bucket)"></i>
-        <i class="el-icon-delete"></i>
+        <i class="el-icon-delete" @click="drop(bucket)"></i>
       </div>
+    </div>
+    <div class="mkbucket">
+      <el-button class="mkbucket-btn" @click="dialogFormVisible = true">创建新仓库</el-button>
+      <el-dialog
+        title="创建新仓库"
+        size="large"
+        top="25%"
+        :visible.sync="dialogFormVisible">
+        <el-form :model="newBucket">
+          <el-form-item label="Name" :label-width="formLabelWidth">
+            <el-input v-model="newBucket.name" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="Region" :label-width="formLabelWidth">
+            <el-select v-model="newBucket.region" placeholder="请选择">
+              <el-option
+                v-for="item in regions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button @click="mkbucket()" v-loading.fullscreen.lock="fullscreenLoading">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -29,6 +57,30 @@
       return {
         fullscreenLoading: false,
         bucketList: buckets,
+        dialogFormVisible: false,
+        formLabelWidth: '80px',
+        regions: [
+          {
+            value: 'z0',
+            label: '华东',
+          },
+          {
+            value: 'z1',
+            label: '华北',
+          },
+          {
+            value: 'z2',
+            label: '华南',
+          },
+          {
+            value: 'na0',
+            label: '北美',
+          },
+        ],
+        newBucket: {
+          name: '',
+          region: '',
+        },
       };
     },
     mounted() {
@@ -46,6 +98,54 @@
         });
     },
     methods: {
+      // create new bucket
+      mkbucket() {
+        this.fullscreenLoading = true;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+
+        Qiniu.mkbucket(accessKey, secretKey, this.newBucket.name, this.newBucket.region)
+          .then(() => {
+            Qiniu.buckets(accessKey, secretKey)
+              .then((data) => {
+                this.dialogFormVisible = false;
+                this.fullscreenLoading = false;
+                this.bucketList = data;
+                this.$message(`仓库 ${this.newBucket.name} 创建成功..💗`);
+              });
+          })
+          .catch((err) => {
+            this.fullscreenLoading = false;
+            this.$message(`${err.error.error}...💔`);
+          });
+      },
+      // drop an exist bucket
+      drop(bucket) {
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        this.$confirm(`确定淘汰 ${bucket} ?`, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          customClass: 'confirm-box',
+        }).then(() => {
+          this.fullscreenLoading = true;
+          Qiniu.drop(accessKey, secretKey, bucket)
+            .then(() => {
+              Qiniu.buckets(accessKey, secretKey)
+                .then((data) => {
+                  this.bucketList = data;
+                  this.fullscreenLoading = false;
+                  this.$message(`成功淘汰${bucket}...💗`);
+                });
+            })
+            .catch((err) => {
+              this.$message(`${err.error.error}...💔`);
+            });
+        }).catch(() => {
+          this.$message('差点手误...💔');
+        });
+      },
       // logout function.
       // keys will be clear.
       logout() {
@@ -141,5 +241,22 @@
   }
   .item-handler i:hover {
     color: #2e84c7;
+  }
+  .mkbucket {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .mkbucket-btn {
+    background: #2e84c7;
+    border: 0;
+    color: #fff;
+    font-size: 12px;
+  }
+  .mkbucket-btn:hover,
+  .mkbucket-btn:focus {
+    color: #fff;
+  }
+  .el-input__icon+.el-input__inner {
+    width: 240px;
   }
 </style>
