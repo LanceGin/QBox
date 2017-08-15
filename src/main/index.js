@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, Menu, Tray } from 'electron' // eslint-disable-line
 
 /**
  * Set `__static` path to static files in production
@@ -10,6 +10,7 @@ if (process.env.NODE_ENV !== 'development') {
 
 let mainWindow;
 let mainMenu;
+let appIcon = null;
 
 const winURL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:9080'
@@ -113,6 +114,19 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  // icon in menu bar
+  if (appIcon === null) {
+    appIcon = new Tray(`${__static}/img/qboxTemplate.png`);
+    const contextMenu = Menu.buildFromTemplate([
+      { label: 'Item1', type: 'radio' },
+      { label: 'Item2', type: 'radio' },
+      { label: 'Item3', type: 'radio', checked: true },
+      { label: 'Item4', type: 'radio' },
+    ]);
+    appIcon.setToolTip('QBox');
+    appIcon.setContextMenu(contextMenu);
+  }
 }
 
 app.on('ready', createWindow);
