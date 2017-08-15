@@ -121,13 +121,27 @@
       },
       // drop an exist bucket
       drop(bucket) {
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
         this.$confirm(`确定淘汰 ${bucket} ?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
           customClass: 'confirm-box',
         }).then(() => {
-          this.$message(`成功淘汰${bucket}...💗`);
+          this.fullscreenLoading = true;
+          Qiniu.drop(accessKey, secretKey, bucket)
+            .then(() => {
+              Qiniu.buckets(accessKey, secretKey)
+                .then((data) => {
+                  this.bucketList = data;
+                  this.fullscreenLoading = false;
+                  this.$message(`成功淘汰${bucket}...💗`);
+                });
+            })
+            .catch((err) => {
+              this.$message(`${err.error.error}...💔`);
+            });
         }).catch(() => {
           this.$message('差点手误...💔');
         });

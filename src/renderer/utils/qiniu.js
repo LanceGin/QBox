@@ -49,6 +49,32 @@ export default class Qiniu {
   }
 
   /**
+   * drop an exist bucket
+   * @param ak      accessKey
+   * @param sk      secretKey
+   * @param name    bucket name
+   */
+  static async drop(ak, sk, name) {
+    const mac = {
+      accessKey: ak,
+      secretKey: sk,
+    };
+    const requestURI = `http://rs.qiniu.com/drop/${name}`;
+    const reqBody = '';
+    const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
+
+    const options = {
+      uri: requestURI,
+      headers: {
+        Authorization: accessToken,
+      },
+      json: true,
+    };
+
+    return rp(options);
+  }
+
+  /**
    * create new bucket
    * @param ak      accessKey
    * @param sk      secretKey
