@@ -1,7 +1,7 @@
 
 # ![Qbox logo](http://otwcctfiu.bkt.clouddn.com/logo-blue.png)
 
-[![Build status](https://ci.appveyor.com/api/projects/status/soh7mapv45levrxy?svg=true)](https://ci.appveyor.com/project/LanceGin/qbox)
+[![Build status](https://ci.appveyor.com/api/projects/status/soh7mapv45levrxy?svg=true)](https://ci.appveyor.com/project/LanceGin/qbox) [![Github All Releases](https://img.shields.io/github/downloads/lancegin/qbox/total.svg)]() [![Itunes App Store](https://img.shields.io/itunes/v/1267204866.svg)]()
 
 
 > QBox是一款方便的[七牛](https://www.qiniu.com/)仓库以及文件管理工具，是一款可以跨平台运行在`OS X`，`Linux` 以及 `Windows` 系统的开源软件。QBox基于 [electron-vue](https://github.com/SimulatedGREG/electron-vue) 开发。
@@ -64,7 +64,7 @@
 
 ## 协议
 
-[AGPL](https://github.com/LanceGin/QBox/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/lancegin/qbox.svg)]()
 
 ## 代码贡献
 
