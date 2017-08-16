@@ -118,14 +118,19 @@ function createWindow() {
   // icon in menu bar
   if (appIcon === null) {
     appIcon = new Tray(`${__static}/img/qboxTemplate.png`);
-    const contextMenu = Menu.buildFromTemplate([
-      { label: 'Item1', type: 'radio' },
-      { label: 'Item2', type: 'radio' },
-      { label: 'Item3', type: 'radio', checked: true },
-      { label: 'Item4', type: 'radio' },
-    ]);
     appIcon.setToolTip('QBox');
-    appIcon.setContextMenu(contextMenu);
+    appIcon.on('click', () => {
+      if (mainWindow === null) {
+        createWindow();
+      }
+    });
+    // const contextMenu = Menu.buildFromTemplate([
+    //   { label: 'Item1', type: 'radio' },
+    //   { label: 'Item2', type: 'radio' },
+    //   { label: 'Item3', type: 'radio', checked: true },
+    //   { label: 'Item4', type: 'radio' },
+    // ]);
+    // appIcon.setContextMenu(contextMenu);
   }
 }
 
