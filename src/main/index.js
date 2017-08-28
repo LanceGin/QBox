@@ -107,9 +107,15 @@ function createWindow() {
     width: 400,
     titleBarStyle: 'hidden-inset',
     resizable: false,
+    show: false,
   });
 
   mainWindow.loadURL(winURL);
+
+  // disable white loading page by 'ready-to-show' event
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -124,13 +130,6 @@ function createWindow() {
         createWindow();
       }
     });
-    // const contextMenu = Menu.buildFromTemplate([
-    //   { label: 'Item1', type: 'radio' },
-    //   { label: 'Item2', type: 'radio' },
-    //   { label: 'Item3', type: 'radio', checked: true },
-    //   { label: 'Item4', type: 'radio' },
-    // ]);
-    // appIcon.setContextMenu(contextMenu);
   }
 }
 

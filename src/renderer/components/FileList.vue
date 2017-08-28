@@ -101,6 +101,7 @@
     created() {
       // refresh files
       Bus.$on('refresh', () => {
+        this.fileList = [];
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
