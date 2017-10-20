@@ -121,6 +121,11 @@ function createWindow() {
     mainWindow = null;
   });
 
+  // disable open a outer resource from a dragover event
+  mainWindow.webContents.on('will-navigate', (e) => {
+    e.preventDefault();
+  });
+
   // icon in menu bar
   if (appIcon === null) {
     appIcon = new Tray(`${__static}/img/qboxTemplate.png`);
