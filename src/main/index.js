@@ -1,4 +1,5 @@
-import { app, BrowserWindow, Menu, Tray } from 'electron' // eslint-disable-line
+import { app, BrowserWindow, Menu, Tray, ipcMain } from 'electron' // eslint-disable-line
+import Qiniu from '../renderer/utils/qiniu';
 
 /**
  * Set `__static` path to static files in production
@@ -127,9 +128,41 @@ function createWindow() {
   });
 
   // icon in menu bar
+  let accessKey = 'fdadsd';
+  let secretKey = 'fdsdffd';
   if (appIcon === null) {
     appIcon = new Tray(`${__static}/img/qboxTemplate.png`);
-    appIcon.setToolTip('QBox');
+    // appIcon.setToolTip('Drag file here and upload to the default bucket.');
+
+    // get qiniu bucket list
+    ipcMain.on('setAccessKey', (event, ak) => {
+      accessKey = ak;
+    });
+    ipcMain.on('setSecretKey', (event, sk) => {
+      secretKey = sk;
+    });
+    appIcon.setToolTip(accessKey);
+    Qiniu.buckets(accessKey, secretKey)
+      .then((data) => {
+        const submenuTmp = [];
+        data.map((bucketTmp) => {
+          const objTmp = {
+            label: bucketTmp,
+            type: 'radio',
+          };
+          return submenuTmp.push(objTmp);
+        });
+        const contextMenu = Menu.buildFromTemplate([
+          {
+            label: 'Default Bucket',
+            submenu: submenuTmp,
+          },
+        ]);
+        appIcon.setContextMenu(contextMenu);
+        // this.bucketList = data;
+      });
+
+    // app tray click event
     appIcon.on('click', () => {
       if (mainWindow === null) {
         createWindow();
