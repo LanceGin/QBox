@@ -128,39 +128,39 @@ function createWindow() {
   });
 
   // icon in menu bar
-  let accessKey = 'fdadsd';
-  let secretKey = 'fdsdffd';
+  let accessKey = '';
+  let secretKey = '';
   if (appIcon === null) {
     appIcon = new Tray(`${__static}/img/qboxTemplate.png`);
     // appIcon.setToolTip('Drag file here and upload to the default bucket.');
 
     // get qiniu bucket list
-    ipcMain.on('setAccessKey', (event, ak) => {
-      accessKey = ak;
-    });
-    ipcMain.on('setSecretKey', (event, sk) => {
-      secretKey = sk;
-    });
-    appIcon.setToolTip(accessKey);
-    Qiniu.buckets(accessKey, secretKey)
-      .then((data) => {
-        const submenuTmp = [];
-        data.map((bucketTmp) => {
-          const objTmp = {
-            label: bucketTmp,
-            type: 'radio',
-          };
-          return submenuTmp.push(objTmp);
+    ipcMain.on('setKey', (event, key) => {
+      accessKey = key.ak;
+      secretKey = key.sk;
+      appIcon.setToolTip(accessKey);
+
+      // appIcon.setToolTip(accessKey);
+      Qiniu.buckets(accessKey, secretKey)
+        .then((data) => {
+          const submenuTmp = [];
+          data.map((bucketTmp) => {
+            const objTmp = {
+              label: bucketTmp,
+              type: 'radio',
+            };
+            return submenuTmp.push(objTmp);
+          });
+          const contextMenu = Menu.buildFromTemplate([
+            {
+              label: 'Default Bucket',
+              submenu: submenuTmp,
+            },
+          ]);
+          appIcon.setContextMenu(contextMenu);
+          // this.bucketList = data;
         });
-        const contextMenu = Menu.buildFromTemplate([
-          {
-            label: 'Default Bucket',
-            submenu: submenuTmp,
-          },
-        ]);
-        appIcon.setContextMenu(contextMenu);
-        // this.bucketList = data;
-      });
+    });
 
     // app tray click event
     appIcon.on('click', () => {
