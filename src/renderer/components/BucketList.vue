@@ -52,8 +52,11 @@
   const { ipcRenderer } = require('electron');
 
   // transfer data to main process
-  ipcRenderer.send('setAccessKey', localStorage.accessKey);
-  ipcRenderer.send('setSecretKey', localStorage.secretKey);
+  const key = {
+    ak: localStorage.accessKey,
+    sk: localStorage.secretKey,
+  };
+  ipcRenderer.send('setKey', key);
 
   let buckets;
   export default {
