@@ -49,6 +49,14 @@
   import Qiniu from '../utils/qiniu';
 
   const BrowserWindow = require('electron').remote.BrowserWindow;
+  const { ipcRenderer } = require('electron');
+
+  // transfer data to main process
+  const key = {
+    ak: localStorage.accessKey,
+    sk: localStorage.secretKey,
+  };
+  ipcRenderer.send('setKey', key);
 
   let buckets;
   export default {
@@ -86,6 +94,7 @@
     mounted() {
       const accessKey = localStorage.accessKey;
       const secretKey = localStorage.secretKey;
+
       Qiniu.buckets(accessKey, secretKey)
         .then((data) => {
           this.bucketList = data;

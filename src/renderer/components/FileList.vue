@@ -242,7 +242,6 @@
       },
       // preview file
       preview(row) {
-        this.dialogVisible = true;
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
@@ -252,6 +251,7 @@
             const domain = data[data.length - 1];
             const link = `http://${domain}/${row.key}`;
             this.preview_name = row.key;
+            this.dialogVisible = true;
             if (row.mimeType.indexOf('image') >= 0) {
               this.preview_url = link;
             } else {
@@ -353,9 +353,10 @@
   }
   .preview {
     text-align: center;
-    height: 300px;
+    max-height: 300px;
   }
   .preview-img {
-    height: 300px;
+    max-height: 300px;
+    max-width: 100%;
   }
 </style>
