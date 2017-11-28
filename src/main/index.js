@@ -138,7 +138,7 @@ function createWindow() {
     ipcMain.on('setKey', (event, key) => {
       accessKey = key.ak;
       secretKey = key.sk;
-      appIcon.setToolTip(accessKey);
+      appIcon.setToolTip('set default bucket and drag a file here to upload');
 
       // appIcon.setToolTip(accessKey);
       Qiniu.buckets(accessKey, secretKey)
