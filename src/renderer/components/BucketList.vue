@@ -55,8 +55,18 @@
   const key = {
     ak: localStorage.accessKey,
     sk: localStorage.secretKey,
+    db: localStorage.db,
   };
+
+  // register an event to set default bucket
+  ipcRenderer.on('setDefaultBucket', (event, arg) => {
+    // console.log(`${arg} args from main process`);
+    localStorage.db = arg;
+  });
+
+  // send signal and transfer localstorage to the main process
   ipcRenderer.send('setKey', key);
+  // console.log(localStorage.db);
 
   let buckets;
   export default {
