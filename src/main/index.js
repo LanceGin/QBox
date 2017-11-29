@@ -130,6 +130,7 @@ function createWindow() {
   // icon in menu bar
   let accessKey = '';
   let secretKey = '';
+  let defaultBucket = '';
   if (appIcon === null) {
     appIcon = new Tray(`${__static}/img/qboxTemplate.png`);
     // appIcon.setToolTip('Drag file here and upload to the default bucket.');
@@ -138,6 +139,7 @@ function createWindow() {
     ipcMain.on('setKey', (event, key) => {
       accessKey = key.ak;
       secretKey = key.sk;
+      defaultBucket = key.db;
       appIcon.setToolTip('set default bucket and drag a file here to upload');
 
       // appIcon.setToolTip(accessKey);
@@ -184,6 +186,22 @@ function createWindow() {
       if (mainWindow === null) {
         createWindow();
       }
+    });
+
+    // app tray drag-enter event
+    appIcon.on('drag-enter', () => {
+      // window.open(this.$router);
+      const uploadWin = new BrowserWindow({
+        height: 640,
+        useContentSize: true,
+        width: 1000,
+        titleBarStyle: 'hidden-inset',
+        resizable: false,
+      });
+      const winURL = process.env.NODE_ENV === 'development'
+        ? 'http://localhost:9080'
+        : `file://${__dirname}/index.html`;
+      uploadWin.loadURL(`${winURL}#/upload?bucket=${defaultBucket}`);
     });
   }
 }
