@@ -107,7 +107,7 @@ function createWindow() {
     useContentSize: true,
     width: 400,
     titleBarStyle: 'hidden-inset',
-    resizable: false,
+    resizable: true,
     show: false,
   });
 
@@ -145,10 +145,27 @@ function createWindow() {
         .then((data) => {
           const submenuTmp = [];
           data.map((bucketTmp) => {
-            const objTmp = {
-              label: bucketTmp,
-              type: 'radio',
-            };
+            // set the default bucket
+            let objTmp;
+            if (key.db !== undefined && bucketTmp === key.db) {
+              objTmp = {
+                label: bucketTmp,
+                type: 'radio',
+                checked: true,
+                click() {
+                  event.sender.send('setDefaultBucket', bucketTmp);
+                },
+              };
+            } else {
+              objTmp = {
+                label: bucketTmp,
+                type: 'radio',
+                click() {
+                  event.sender.send('setDefaultBucket', bucketTmp);
+                },
+              };
+            }
+
             return submenuTmp.push(objTmp);
           });
           const contextMenu = Menu.buildFromTemplate([
