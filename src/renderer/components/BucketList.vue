@@ -64,10 +64,6 @@
     localStorage.db = arg;
   });
 
-  // send signal and transfer localstorage to the main process
-  ipcRenderer.send('setKey', key);
-  // console.log(localStorage.db);
-
   let buckets;
   export default {
     name: 'bucket-list',
@@ -115,6 +111,10 @@
           localStorage.clear();
           this.$router.push({ path: '/login' });
         });
+
+      // send signal and transfer localstorage to the main process
+      ipcRenderer.send('setKey', key);
+      // console.log(localStorage.db);
     },
     methods: {
       // create new bucket
