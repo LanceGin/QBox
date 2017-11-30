@@ -48,7 +48,7 @@
 #### MenuBar
 
 - [x] Set default bucket.
-- [ ] Drag to MenuBar icon to upload.
+- [x] Drag to MenuBar icon to upload.
 
 #### Bucket Panel
 
