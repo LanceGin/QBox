@@ -1,6 +1,6 @@
 {
   "name": "qbox",
-  "version": "1.4",
+  "version": "1.4.0",
   "author": "lancegin",
   "description": "assistant",
   "license": "AGPL",
@@ -49,7 +49,7 @@
     "mac": {
       "icon": "build/icons/icon.icns",
       "target": ["mas", "dmg", "pkg"],
-      "bundleVersion": "1.4"
+      "bundleVersion": "1.4.0"
     },
     "win": {
       "icon": "build/icons/icon.ico"
