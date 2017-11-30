@@ -107,7 +107,7 @@ function createWindow() {
     useContentSize: true,
     width: 400,
     titleBarStyle: 'hidden-inset',
-    resizable: true,
+    resizable: false,
     show: false,
   });
 
@@ -156,6 +156,7 @@ function createWindow() {
                 checked: true,
                 click() {
                   event.sender.send('setDefaultBucket', bucketTmp);
+                  defaultBucket = bucketTmp;
                 },
               };
             } else {
@@ -164,6 +165,7 @@ function createWindow() {
                 type: 'radio',
                 click() {
                   event.sender.send('setDefaultBucket', bucketTmp);
+                  defaultBucket = bucketTmp;
                 },
               };
             }
