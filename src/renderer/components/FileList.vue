@@ -8,8 +8,8 @@
       width="30%">
       <el-input v-model="currentName" :placeholder="currentName"></el-input>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="renameDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="renameDialogVisible = false">确 定</el-button>
+        <el-button @click="renameCancel">取 消</el-button>
+        <el-button type="primary" @click="renameConfirm">确 定</el-button>
       </span>
     </el-dialog>
   
@@ -259,6 +259,14 @@
       rename(row) {
         this.currentName = row.key;
         this.renameDialogVisible = true;
+      },
+      renameCancel() {
+        this.renameDialogVisible = false;
+        this.$message('已取消..💗');
+      },
+      renameConfirm() {
+        this.renameDialogVisible = false;
+        this.$message('确定重命名..💗');
       },
       // preview file
       preview(row) {
