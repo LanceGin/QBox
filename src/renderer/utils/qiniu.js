@@ -215,4 +215,40 @@ export default class Qiniu {
 
     return rp(options);
   }
+
+  /**
+   * rename the resource
+   * @param ak      accessKey
+   * @param sk      secretKey
+   * @param bucket  bucket name
+   * @param oldName the old name of the resource
+   * @param newName the new name of the resource
+   */
+  static async rename(ak, sk, bucket, oldName, newName) {
+    const mac = {
+      accessKey: ak,
+      secretKey: sk,
+    };
+    // generate encodedEntryURISrc
+    const entrySrc = `${bucket}:${oldName}`;
+    const encodedEntryURISrc = Util.urlsafeBase64Encode(entrySrc);
+
+    // generate encodedEntryURIDest
+    const entryDest = `${bucket}:${newName}`;
+    const encodedEntryURIDest = Util.urlsafeBase64Encode(entryDest);
+
+    const requestURI = `http://rs.qiniu.com/copy/${encodedEntryURISrc}/${encodedEntryURIDest}`;
+    const reqBody = '';
+    const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
+
+    const options = {
+      uri: requestURI,
+      headers: {
+        Authorization: accessToken,
+      },
+      json: true,
+    };
+
+    return rp(options);
+  }
 }

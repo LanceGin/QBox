@@ -1,5 +1,17 @@
 <template>
   <div id="file-list-page">
+
+    <!-- rename resource -->
+    <el-dialog
+      title="重命名资源"
+      :visible.sync="renameDialogVisible"
+      width="30%">
+      <el-input v-model="currentName" :placeholder="currentName"></el-input>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="renameCancel">取 消</el-button>
+        <el-button type="primary" @click="renameConfirm">确 定</el-button>
+      </span>
+    </el-dialog>
   
     <!-- preview -->
     <el-dialog
@@ -37,13 +49,13 @@
         prop="mimeType"
         label="文件类型"
         sortable
-        width="150">
+        width="140">
       </el-table-column>
       <el-table-column
         prop="fsize"
         label="文件大小"
         sortable
-        width="150"
+        width="120"
         :formatter="fsizeFormat">
       </el-table-column>
       <el-table-column
@@ -55,11 +67,12 @@
       </el-table-column>
       <el-table-column
         label="操作"
-        width="145">
+        width="185">
         <template scope="scope">
           <el-button type="text" size="small" icon="view" @click="preview(scope.row)"></el-button>
           <el-button type="text" size="small" @click="removeFile(scope.row)">删除</el-button>
           <el-button type="text" size="small" @click="copyLink(scope.row)">复制</el-button>
+          <el-button type="text" size="small" @click="rename(scope.row)">重命名</el-button>
         </template>
       </el-table-column>
       <template slot="append">
@@ -89,6 +102,7 @@
     name: 'file-list',
     data() {
       return {
+        renameDialogVisible: false,
         dialogVisible: false,
         fileList: [],
         multipleSelection: [],
@@ -96,6 +110,7 @@
         preview_name: '',
         marker: '',
         filter: '',
+        currentName: '',
       };
     },
     created() {
@@ -239,6 +254,19 @@
         }).catch(() => {
           this.$message('取消删除');
         });
+      },
+      // rename file
+      rename(row) {
+        this.currentName = row.key;
+        this.renameDialogVisible = true;
+      },
+      renameCancel() {
+        this.renameDialogVisible = false;
+        this.$message('已取消..💗');
+      },
+      renameConfirm() {
+        this.renameDialogVisible = false;
+        this.$message('确定重命名..💗');
       },
       // preview file
       preview(row) {
