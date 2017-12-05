@@ -237,7 +237,7 @@ export default class Qiniu {
     const entryDest = `${bucket}:${newName}`;
     const encodedEntryURIDest = Util.urlsafeBase64Encode(entryDest);
 
-    const requestURI = `http://rs.qiniu.com/copy/${encodedEntryURISrc}/${encodedEntryURIDest}`;
+    const requestURI = `http://rs.qiniu.com/move/${encodedEntryURISrc}/${encodedEntryURIDest}`;
     const reqBody = '';
     const accessToken = Util.generateAccessToken(mac, requestURI, reqBody);
 
