@@ -110,6 +110,7 @@
         preview_name: '',
         marker: '',
         filter: '',
+        oldName: '',
         currentName: '',
       };
     },
@@ -257,16 +258,30 @@
       },
       // rename file
       rename(row) {
+        this.oldName = row.key;
         this.currentName = row.key;
         this.renameDialogVisible = true;
       },
       renameCancel() {
         this.renameDialogVisible = false;
-        this.$message('已取消..💗');
       },
       renameConfirm() {
-        this.renameDialogVisible = false;
-        this.$message('确定重命名..💗');
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        console.log(bucket, this.oldName, this.currentName);
+        Qiniu.rename(accessKey, secretKey, bucket, this.oldName, this.currentName)
+          .then(() => {
+            this.renameDialogVisible = false;
+            this.$message('重命名成功..💗');
+            Qiniu.list(accessKey, secretKey, bucket)
+              .then((data) => {
+                this.marker = data.marker == null ? '' : data.marker;
+                this.fileList = data.items;
+              })
+              .catch();
+          })
+          .catch();
       },
       // preview file
       preview(row) {
