@@ -7,7 +7,7 @@
       <el-button class="w-btn" type="text" icon="upload" @click="upload()"> 上传</el-button>
       <el-button class="w-btn" type="text" icon="time" @click="refresh()"> 刷新</el-button>
       <el-button class="w-btn" type="text" icon="delete" :disabled="batchShow" @click="batchDelete()">删除</el-button>
-      <!-- <el-button class="w-btn" type="text" :disabled="true" icon="document" @click="batchDownload()"> 下载</el-button> -->
+      <el-button class="w-btn" type="text" :disabled="true" icon="document" @click="batchDownload()"> 下载</el-button>
     </div>
     <div class="search-input">
       <el-input
