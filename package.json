@@ -1,6 +1,6 @@
 {
   "name": "qbox",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": "lancegin",
   "description": "assistant",
   "license": "AGPL",
@@ -53,7 +53,7 @@
         "dmg",
         "pkg"
       ],
-      "bundleVersion": "1.5.0"
+      "bundleVersion": "1.6.0"
     },
     "win": {
       "icon": "build/icons/icon.ico"

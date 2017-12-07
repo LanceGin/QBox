@@ -59,7 +59,7 @@
 
 - [x] Add enter event to search box.
 - [ ] Upload mutiple files.
-- [ ] Download a batch of files were checked.
+- [x] Download a batch of files were checked.
 - [x] Rename resouces.
 
 ## License
