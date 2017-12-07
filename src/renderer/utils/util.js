@@ -88,4 +88,12 @@ export default class Util {
     const safeDigest = this.base64ToUrlSafe(digest);
     return `QBox ${mac.accessKey}:${safeDigest}`;
   }
+
+  /**
+   * transfer url string to Blob object
+   * @param url    url string
+   */
+  static urlToBlob(url) {
+    return fetch(url);
+  }
 }
