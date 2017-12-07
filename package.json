@@ -48,7 +48,11 @@
     },
     "mac": {
       "icon": "build/icons/icon.icns",
-      "target": ["mas", "dmg", "pkg"],
+      "target": [
+        "mas",
+        "dmg",
+        "pkg"
+      ],
       "bundleVersion": "1.5.0"
     },
     "win": {
@@ -61,6 +65,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "element-ui": "^1.4.0",
+    "jszip": "^3.1.5",
     "moment": "^2.18.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",

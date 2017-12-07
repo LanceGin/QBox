@@ -158,7 +158,38 @@
 
       // batch download
       Bus.$on('batchDownload', () => {
-        console.log('批量下载');
+        // import jszip and fileSaver
+        const JSZip = require('jszip');
+        const saveAs = require('jszip/vendor/FileSaver');
+
+        const bucket = this.$route.query.bucket;
+        const accessKey = localStorage.accessKey;
+        const secretKey = localStorage.secretKey;
+        const zip = new JSZip();
+        const items = this.multipleSelection;
+
+        Qiniu.domain(accessKey, secretKey, bucket)
+          .then((data) => {
+            const domain = data[data.length - 1];
+
+            items.forEach((item) => {
+              const link = `http://${domain}/${item.key}`;
+
+              // add file to the zip file through promise
+              const promise = Util.urlToBlob(link).then(res => res.blob());
+              zip.file(item.key, promise);
+            });
+
+            // compress and download
+            zip.generateAsync({
+              type: 'blob',
+              mimeType: 'application/zip',
+            })
+              .then((content) => {
+                saveAs(content, 'qbox-batchDownload.zip.zip');
+              });
+          })
+          .catch();
       });
 
       // search filter
@@ -168,7 +199,7 @@
         const secretKey = localStorage.secretKey;
         Qiniu.list(accessKey, secretKey, bucket, '', filter)
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             this.filter = filter;
             this.marker = data.marker == null ? '' : data.marker;
             this.fileList = data.items;
@@ -187,7 +218,7 @@
       const secretKey = localStorage.secretKey;
       Qiniu.list(accessKey, secretKey, bucket)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           this.marker = data.marker == null ? '' : data.marker;
           this.fileList = data.items;
         })
@@ -269,7 +300,7 @@
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
-        console.log(bucket, this.oldName, this.currentName);
+        // console.log(bucket, this.oldName, this.currentName);
         Qiniu.rename(accessKey, secretKey, bucket, this.oldName, this.currentName)
           .then(() => {
             this.renameDialogVisible = false;
@@ -334,7 +365,7 @@
       },
       // loadMore feature
       loadMore() {
-        console.log(this.filter);
+        // console.log(this.filter);
         const bucket = this.$route.query.bucket;
         const accessKey = localStorage.accessKey;
         const secretKey = localStorage.secretKey;
