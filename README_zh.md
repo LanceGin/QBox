@@ -1,5 +1,5 @@
 
-# ![Qbox logo](http://otwcctfiu.bkt.clouddn.com/logo-blue.png)
+# ![Qbox logo](http://orhcxc3kd.bkt.clouddn.com/logo-blue.png)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/soh7mapv45levrxy?svg=true)](https://ci.appveyor.com/project/LanceGin/qbox) [![Github All Releases](https://img.shields.io/github/downloads/lancegin/qbox/total.svg)]() [![Itunes App Store](https://img.shields.io/itunes/v/1267204866.svg)]()
 
